@@ -1,0 +1,182 @@
+@model IEnumerable<cars_web.Models.Service>
+
+@{
+    ViewData["Title"] = "Услуги автосервиса";
+}
+
+<div class="services-container py-5">
+    <div class="container">
+        <nav aria-label="breadcrumb" class="mb-4">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index" class="pink-link">Главная</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Услуги</li>
+            </ol>
+        </nav>
+
+        <h1 class="mb-4 pink-text">Наши услуги</h1>
+
+        <div class="row mb-4">
+            <div class="col-md-6">
+                <div class="input-group">
+                    <input type="text" id="search-services" class="form-control" placeholder="Поиск услуг...">
+                    <button class="btn btn-pink" type="button">
+                        <i class="fas fa-search"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="d-flex justify-content-md-end mt-3 mt-md-0">
+                    <div class="dropdown">
+                        <button class="btn btn-outline-pink dropdown-toggle" type="button" id="sortDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                            Сортировка
+                        </button>
+                        <ul class="dropdown-menu" aria-labelledby="sortDropdown">
+                            <li><a class="dropdown-item" href="#">По умолчанию</a></li>
+                            <li><a class="dropdown-item" href="#">Цена (возрастание)</a></li>
+                            <li><a class="dropdown-item" href="#">Цена (убывание)</a></li>
+                            <li><a class="dropdown-item" href="#">Название (А-Я)</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            @foreach (var service in Model)
+            {
+                <div class="col-md-6 mb-4">
+                    <div class="card h-100 border-0 shadow-sm service-card">
+                        <div class="row g-0">
+                            <div class="col-md-4">
+                                <div class="service-img-container h-100">
+                                    @if (!string.IsNullOrEmpty(service.ImagePath))
+                                    {
+                                        <img src="~/images/@service.ImagePath" class="img-fluid rounded-start h-100" alt="@service.Name">
+                                    }
+                                    else
+                                    {
+                                        <img src="~/images/service-placeholder.jpg" class="img-fluid rounded-start h-100" alt="@service.Name">
+                                    }
+                                </div>
+                            </div>
+                            <div class="col-md-8">
+                                <div class="card-body d-flex flex-column h-100">
+                                    <h5 class="card-title pink-text">@service.Name</h5>
+                                    <p class="card-text flex-grow-1">@service.ShortDescription</p>
+                                    <div class="mt-auto">
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            <span class="fw-bold fs-5 pink-text">@service.Price ₽</span>
+                                            <a asp-controller="Services" asp-action="Details" asp-route-id="@service.Id" class="btn btn-sm btn-pink">
+                                                Подробнее
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+<style>
+    :root {
+        --pink-primary: #ff69b4;
+        --pink-secondary: #ffb6c1;
+        --pink-light: #ffe6ee;
+        --pink-dark: #d44a87;
+    }
+    
+    body {
+        background-color: #fff;
+        color: #333;
+    }
+    
+    .pink-text {
+        color: var(--pink-primary);
+    }
+    
+    .pink-link {
+        color: var(--pink-primary);
+        text-decoration: none;
+    }
+    
+    .pink-link:hover {
+        color: var(--pink-dark);
+        text-decoration: underline;
+    }
+    
+    .btn-pink {
+        background-color: var(--pink-primary);
+        border-color: var(--pink-primary);
+        color: white;
+    }
+    
+    .btn-pink:hover {
+        background-color: var(--pink-dark);
+        border-color: var(--pink-dark);
+        color: white;
+    }
+    
+    .btn-outline-pink {
+        border-color: var(--pink-primary);
+        color: var(--pink-primary);
+    }
+    
+    .btn-outline-pink:hover {
+        background-color: var(--pink-primary);
+        color: white;
+    }
+    
+    .service-card {
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        border-radius: 10px;
+        overflow: hidden;
+    }
+    
+    .service-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 20px rgba(255, 105, 180, 0.15) !important;
+    }
+    
+    .service-img-container {
+        overflow: hidden;
+    }
+    
+    .service-img-container img {
+        object-fit: cover;
+        transition: transform 0.3s ease;
+    }
+    
+    .service-card:hover .service-img-container img {
+        transform: scale(1.05);
+    }
+    
+    /* Override default Bootstrap styles with pink theme */
+    .navbar {
+        background-color: white !important;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+    
+    .navbar-brand, .nav-link {
+        color: var(--pink-primary) !important;
+    }
+    
+    .nav-link:hover {
+        color: var(--pink-dark) !important;
+    }
+    
+    .dropdown-item:active {
+        background-color: var(--pink-primary);
+    }
+    
+    .card {
+        border-radius: 10px;
+    }
+    
+    .breadcrumb-item.active {
+        color: var(--pink-primary);
+    }
+</style> 

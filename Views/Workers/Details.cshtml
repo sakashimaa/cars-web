@@ -1,0 +1,285 @@
+@model cars_web.Models.Worker
+
+@{
+    ViewData["Title"] = Model.Name;
+    var reviews = ViewBag.Reviews as List<cars_web.Models.Review> ?? new List<cars_web.Models.Review>();
+}
+
+<div class="worker-details-container py-5">
+    <div class="container">
+        <nav aria-label="breadcrumb" class="mb-4">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">Главная</a></li>
+                <li class="breadcrumb-item"><a asp-controller="Workers" asp-action="Index">Сотрудники</a></li>
+                <li class="breadcrumb-item active" aria-current="page">@Model.Name</li>
+            </ol>
+        </nav>
+
+        <div class="row">
+            <div class="col-lg-7 mb-4 mb-lg-0">
+                <div class="card border-0 shadow-sm worker-gallery">
+                    @if (!string.IsNullOrEmpty(Model.ImagePath))
+                    {
+                        <img src="~/images/@Model.ImagePath" class="img-fluid rounded" alt="@Model.Name">
+                    }
+                    else
+                    {
+                        <img src="~/images/alexey_kuznetsov.jpg" class="img-fluid rounded" alt="@Model.Name">
+                    }
+                </div>
+            </div>
+            <div class="col-lg-5">
+                <div class="card border-0 shadow-sm h-100">
+                    <div class="card-body">
+                        <h1 class="card-title fs-2 fw-bold mb-3">@Model.Name</h1>
+                        <div class="worker-actions d-grid gap-2">
+                            <button class="btn btn-primary btn-lg" onclick="toggleConsultantPopup()">Связаться</button>
+                            <button class="btn btn-outline-primary">Подробнее</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        @if (!string.IsNullOrEmpty(Model.FullDescription))
+        {
+            <div class="row mt-4">
+                <div class="col-12">
+                    <div class="card border-0 shadow-sm">
+                        <div class="card-body">
+                            <h2 class="fs-4 mb-3">О сотруднике</h2>
+                            <div class="worker-bio">
+                                @Model.FullDescription
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+
+        <div class="worker-reviews mt-5">
+            <h2 class="fs-4 mb-3">Отзывы</h2>
+            <div id="reviews-container">
+                @if (reviews.Any())
+                {
+                    @foreach (var review in reviews)
+                    {
+                        <div class="review mb-3 p-3 border rounded shadow-sm">
+                            <div class="d-flex justify-content-between align-items-center mb-2">
+                                <h4 class="fs-6 mb-0">@review.ShortDescription</h4>
+                                <div class="rating">
+                                    @for (int i = 1; i <= 5; i++)
+                                    {
+                                        <i class="@(i <= review.Rating ? "fas" : "far") fa-star text-warning"></i>
+                                    }
+                                </div>
+                            </div>
+                            <p class="mb-0">@review.FullDescription</p>
+                        </div>
+                    }
+                }
+                else
+                {
+                    <p class="text-muted">Отзывов пока нет</p>
+                }
+            </div>
+            <div class="add-review mt-4">
+                <h3 class="fs-5">Оставить отзыв</h3>
+                <form id="review-form">
+                    <div class="mb-3">
+                        <label for="reviewer-name" class="form-label">Заголовок</label>
+                        <input type="text" id="reviewer-name" class="form-control" placeholder="Краткое описание отзыва" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="review-text" class="form-label">Ваш отзыв</label>
+                        <textarea id="review-text" class="form-control" rows="4" placeholder="Подробное описание отзыва" required></textarea>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Оценка</label>
+                        <div class="rating-input">
+                            @for (int i = 1; i <= 5; i++)
+                            {
+                                <input type="radio" id="star@(i)" name="rating" value="@i" class="d-none" />
+                                <label for="star@(i)" class="far fa-star text-warning star-rating-label"></label>
+                            }
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Отправить</button>
+                </form>
+            </div>
+        </div>
+
+        <div class="row mt-4">
+            <div class="col-12">
+                <a asp-action="Index" class="btn btn-outline-secondary">
+                    <i class="fas fa-arrow-left me-2"></i>Вернуться к списку сотрудников
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="consultant-popup" class="consultant-popup d-none">
+    <div class="consultant-header">
+        <h5>Консультант</h5>
+        <button type="button" class="btn-close" onclick="toggleConsultantPopup()">&times;</button>
+    </div>
+    <div class="consultant-body">
+        <p>Пожалуйста, введите ваш номер телефона, чтобы мы могли связаться с вами:</p>
+        <input type="text" id="user-phone" class="form-control" placeholder="Ваш номер телефона">
+        <button class="btn btn-primary mt-2" onclick="submitPhoneNumber('@ViewData["Token"]')">Отправить</button>
+    </div>
+</div>
+
+<script>
+    function toggleConsultantPopup() {
+        const popup = document.getElementById('consultant-popup');
+        popup.classList.toggle('d-none');
+    };
+
+    async function submitPhoneNumber(token) {
+        const phoneNumber = document.getElementById('user-phone').value;
+        console.log(`phone number: ${phoneNumber}`);
+        console.log(`token: ${token}`);
+        if (phoneNumber) {
+            try {
+                const response = await fetch('http://localhost:3002/tasks', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${token}`
+                    },
+                    body: JSON.stringify({
+                         name: `Позвонить клиенту с номером ${phoneNumber}`, description: `Клиент заинтересовался работником @Html.Raw(Json.Serialize(Model.Name))`,
+                    })
+                });
+                if (response.ok) {
+                    alert('Ваш номер успешно отправлен консультанту!');
+                } else {
+                    alert('Произошла ошибка при отправке номера.');
+                }
+            } catch (error) {
+                console.error('Ошибка:', error.message);
+                alert('Произошла ошибка при отправке номера.');
+            }
+            toggleConsultantPopup();
+        } else {
+            alert('Пожалуйста, введите номер телефона.');
+        }
+    }
+
+    // Update star rating system
+    document.querySelectorAll('.star-rating-label').forEach(star => {
+        star.addEventListener('click', function() {
+            const rating = this.getAttribute('for').replace('star', '');
+            document.querySelectorAll('.star-rating-label').forEach(s => {
+                s.classList.remove('fas');
+                s.classList.add('far');
+            });
+            
+            for (let i = 1; i <= rating; i++) {
+                document.querySelector(`label[for="star${i}"]`).classList.remove('far');
+                document.querySelector(`label[for="star${i}"]`).classList.add('fas');
+            }
+        });
+    });
+
+    // Override existing review form submit
+    document.getElementById('review-form').addEventListener('submit', function(event) {
+        event.preventDefault();
+
+        const title = document.getElementById('reviewer-name').value;
+        const text = document.getElementById('review-text').value;
+        const ratingInput = document.querySelector('input[name="rating"]:checked');
+        const rating = ratingInput ? parseInt(ratingInput.value) : 5;
+
+        if (title && text) {
+            const reviewContainer = document.getElementById('reviews-container');
+
+            // Удаляем сообщение о том, что отзывов нет
+            const noReviewsMessage = reviewContainer.querySelector('.text-muted');
+            if (noReviewsMessage) {
+                noReviewsMessage.remove();
+            }
+
+            // Добавляем новый отзыв
+            const reviewElement = document.createElement('div');
+            reviewElement.classList.add('review', 'mb-3', 'p-3', 'border', 'rounded', 'shadow-sm');
+            
+            let starsHtml = '';
+            for (let i = 1; i <= 5; i++) {
+                starsHtml += `<i class="${i <= rating ? 'fas' : 'far'} fa-star text-warning"></i>`;
+            }
+            
+            reviewElement.innerHTML = `
+                <div class="d-flex justify-content-between align-items-center mb-2">
+                    <h4 class="fs-6 mb-0">${title}</h4>
+                    <div class="rating">
+                        ${starsHtml}
+                    </div>
+                </div>
+                <p class="mb-0">${text}</p>
+            `;
+            reviewContainer.appendChild(reviewElement);
+
+            // Очищаем форму
+            document.getElementById('review-form').reset();
+            document.querySelectorAll('.star-rating-label').forEach(s => {
+                s.classList.remove('fas');
+                s.classList.add('far');
+            });
+        } else {
+            alert('Пожалуйста, заполните все поля.');
+        }
+    });
+</script>
+
+<style>
+    .consultant-popup {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        width: 300px;
+        background: white;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        border-radius: 8px;
+        overflow: hidden;
+        z-index: 1000;
+    }
+
+    .consultant-header {
+        background: #007bff;
+        color: white;
+        padding: 10px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .consultant-body {
+        padding: 15px;
+    }
+
+    .d-none {
+        display: none;
+    }
+
+    .star-rating-label {
+        cursor: pointer;
+        font-size: 1.25rem;
+        padding: 0 0.2rem;
+    }
+
+    .star-rating-label:hover,
+    .star-rating-label:hover ~ .star-rating-label,
+    input:checked ~ .star-rating-label {
+        content: "\f005";
+        font-weight: 900;
+    }
+
+    .rating-input {
+        display: flex;
+        flex-direction: row-reverse;
+        justify-content: flex-end;
+    }
+</style>

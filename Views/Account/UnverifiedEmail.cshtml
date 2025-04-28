@@ -1,0 +1,53 @@
+@model cars_web.Models.UnverifiedEmailViewModel
+
+@{
+    ViewData["Title"] = "Требуется подтверждение email";
+}
+
+<div class="auth-container py-5">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="card border-0 shadow-sm">
+                    <div class="card-body p-4 text-center">
+                        <div class="mb-4">
+                            <i class="fa-solid fa-envelope-open-text text-warning" style="font-size: 5rem;"></i>
+                        </div>
+                        
+                        <h2 class="mb-3">Требуется подтверждение email</h2>
+                        
+                        @if (TempData["SuccessMessage"] != null)
+                        {
+                            <div class="alert alert-success">
+                                @TempData["SuccessMessage"]
+                            </div>
+                        }
+                        
+                        @if (TempData["ErrorMessage"] != null)
+                        {
+                            <div class="alert alert-danger">
+                                @TempData["ErrorMessage"]
+                            </div>
+                        }
+                        
+                        <div class="alert alert-warning mb-4">
+                            <p class="mb-0">Ваш email <strong>@Model.Email</strong> не подтвержден. Для доступа к сайту необходимо подтвердить email.</p>
+                        </div>
+                        
+                        <p class="mb-4">
+                            Проверьте вашу почту и перейдите по ссылке, указанной в письме. Если вы не получили письмо, вы можете запросить повторную отправку.
+                        </p>
+                        
+                        <form asp-action="SendVerificationEmail" method="post">
+                            <button type="submit" class="btn btn-primary">Отправить письмо повторно</button>
+                        </form>
+                        
+                        <div class="mt-4">
+                            <a asp-controller="Account" asp-action="Login" class="btn btn-outline-secondary">Вернуться на страницу входа</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div> 

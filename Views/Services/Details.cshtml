@@ -1,0 +1,418 @@
+@model cars_web.Models.Service
+
+@{
+    ViewData["Title"] = Model.Name;
+}
+
+<div class="service-container py-5">
+    <div class="container">
+        <nav aria-label="breadcrumb" class="mb-4">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index" class="pink-link">Главная</a></li>
+                <li class="breadcrumb-item"><a asp-controller="Services" asp-action="Index" class="pink-link">Услуги</a></li>
+                <li class="breadcrumb-item active" aria-current="page">@Model.Name</li>
+            </ol>
+        </nav>
+
+        <div class="row">
+            <div class="col-lg-6 mb-4 mb-lg-0">
+                <div class="card border-0 shadow-sm service-gallery rounded-custom">
+                    @if (!string.IsNullOrEmpty(Model.ImagePath))
+                    {
+                        <img src="~/images/@Model.ImagePath" class="img-fluid rounded-custom" alt="@Model.Name">
+                    }
+                    else
+                    {
+                        <img src="~/images/service-placeholder.jpg" class="img-fluid rounded-custom" alt="@Model.Name">
+                    }
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="card border-0 shadow-sm rounded-custom">
+                    <div class="card-body">
+                        <h1 class="card-title fs-2 fw-bold mb-3 pink-text">@Model.Name</h1>
+                        
+                        <div class="service-price mb-4">
+                            <h3 class="fs-3 fw-bold pink-text">@Model.Price ₽</h3>
+                        </div>
+                        
+                        <div class="service-description mb-4">
+                            <p>@Model.LongDescription</p>
+                        </div>
+                        
+                        <div class="service-actions d-grid gap-2">
+                            <button class="btn btn-pink btn-lg">
+                                <i class="fas fa-calendar-alt me-2"></i>Записаться на услугу
+                            </button>
+                            <button class="btn btn-outline-pink" onclick="toggleConsultantPopup()">
+                                <i class="fas fa-phone-alt me-2"></i>Получить консультацию
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="card border-0 shadow-sm mt-4 rounded-custom pink-light-bg">
+                    <div class="card-body">
+                        <h3 class="fs-5 mb-3 pink-text">Почему выбирают нас</h3>
+                        <ul class="list-unstyled mb-0">
+                            <li class="mb-2"><i class="fas fa-check text-pink me-2"></i> Профессиональные мастера</li>
+                            <li class="mb-2"><i class="fas fa-check text-pink me-2"></i> Гарантия качества услуг</li>
+                            <li class="mb-2"><i class="fas fa-check text-pink me-2"></i> Современное оборудование</li>
+                            <li><i class="fas fa-check text-pink me-2"></i> Фиксированные цены</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mt-4">
+            <div class="col-12">
+                <div class="card border-0 shadow-sm rounded-custom">
+                    <div class="card-body">
+                        <ul class="nav nav-tabs pink-tabs" id="serviceTabs" role="tablist">
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link active" id="description-tab" data-bs-toggle="tab" data-bs-target="#description" type="button" role="tab" aria-controls="description" aria-selected="true">Описание</button>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link" id="process-tab" data-bs-toggle="tab" data-bs-target="#process" type="button" role="tab" aria-controls="process" aria-selected="false">Процесс работы</button>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link" id="reviews-tab" data-bs-toggle="tab" data-bs-target="#reviews" type="button" role="tab" aria-controls="reviews" aria-selected="false">Отзывы</button>
+                            </li>
+                        </ul>
+                        <div class="tab-content py-3" id="serviceTabsContent">
+                            <div class="tab-pane fade show active" id="description" role="tabpanel" aria-labelledby="description-tab">
+                                <p>@Model.LongDescription</p>
+                                <p>Наша автомастерская гарантирует высокое качество выполнения работ и использование сертифицированных материалов. Мы стремимся обеспечить максимальный комфорт и безопасность вашего автомобиля.</p>
+                            </div>
+                            <div class="tab-pane fade" id="process" role="tabpanel" aria-labelledby="process-tab">
+                                <h4 class="fs-5 pink-text mb-3">Этапы выполнения работы:</h4>
+                                <ol>
+                                    <li class="mb-2">Предварительная диагностика состояния автомобиля</li>
+                                    <li class="mb-2">Расчет стоимости услуги с учетом необходимых материалов</li>
+                                    <li class="mb-2">Согласование объема работ с клиентом</li>
+                                    <li class="mb-2">Выполнение работ квалифицированными специалистами</li>
+                                    <li>Контроль качества и передача автомобиля клиенту</li>
+                                </ol>
+                            </div>
+                            <div class="tab-pane fade" id="reviews" role="tabpanel" aria-labelledby="reviews-tab">
+                                <div id="reviews-container">
+                                    <div class="review mb-3 p-3 border rounded-custom shadow-sm">
+                                        <div class="d-flex justify-content-between align-items-center mb-2">
+                                            <h5 class="fs-6 mb-0">Александр Петров</h5>
+                                            <div class="rating">
+                                                <i class="fas fa-star text-pink"></i>
+                                                <i class="fas fa-star text-pink"></i>
+                                                <i class="fas fa-star text-pink"></i>
+                                                <i class="fas fa-star text-pink"></i>
+                                                <i class="fas fa-star text-pink"></i>
+                                            </div>
+                                        </div>
+                                        <p class="mb-0">Отличный сервис! Быстро и качественно выполнили работу. Рекомендую всем автовладельцам.</p>
+                                    </div>
+                                    <div class="review mb-3 p-3 border rounded-custom shadow-sm">
+                                        <div class="d-flex justify-content-between align-items-center mb-2">
+                                            <h5 class="fs-6 mb-0">Елена Сидорова</h5>
+                                            <div class="rating">
+                                                <i class="fas fa-star text-pink"></i>
+                                                <i class="fas fa-star text-pink"></i>
+                                                <i class="fas fa-star text-pink"></i>
+                                                <i class="fas fa-star text-pink"></i>
+                                                <i class="far fa-star text-pink"></i>
+                                            </div>
+                                        </div>
+                                        <p class="mb-0">Хороший сервис, адекватные цены. Мастера грамотные и вежливые.</p>
+                                    </div>
+                                </div>
+                                <div class="add-review mt-4">
+                                    <h4 class="fs-5 pink-text">Оставить отзыв</h4>
+                                    <form id="review-form">
+                                        <div class="mb-3">
+                                            <label for="reviewer-name" class="form-label">Ваше имя</label>
+                                            <input type="text" id="reviewer-name" class="form-control" placeholder="Введите ваше имя" required>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="review-text" class="form-label">Ваш отзыв</label>
+                                            <textarea id="review-text" class="form-control" rows="4" placeholder="Напишите ваш отзыв" required></textarea>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label class="form-label">Оценка</label>
+                                            <div class="rating-input">
+                                                @for (int i = 1; i <= 5; i++)
+                                                {
+                                                    <input type="radio" id="star@(i)" name="rating" value="@i" class="d-none" />
+                                                    <label for="star@(i)" class="far fa-star text-pink star-rating-label"></label>
+                                                }
+                                            </div>
+                                        </div>
+                                        <button type="submit" class="btn btn-pink">Отправить</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mt-4">
+            <div class="col-12">
+                <a asp-action="Index" class="btn btn-outline-pink">
+                    <i class="fas fa-arrow-left me-2"></i>Вернуться к списку услуг
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="consultant-popup" class="consultant-popup d-none">
+    <div class="consultant-header">
+        <h5>Консультация</h5>
+        <button type="button" class="btn-close" onclick="toggleConsultantPopup()"></button>
+    </div>
+    <div class="consultant-body">
+        <p>Пожалуйста, введите ваш номер телефона, и мы перезвоним вам в ближайшее время:</p>
+        <input type="text" id="user-phone" class="form-control mb-2" placeholder="Ваш номер телефона">
+        <button class="btn btn-pink w-100" onclick="submitPhoneNumber()">Получить консультацию</button>
+    </div>
+</div>
+
+<style>
+    :root {
+        --pink-primary: #ff69b4;
+        --pink-secondary: #ffb6c1;
+        --pink-light: #ffe6ee;
+        --pink-dark: #d44a87;
+    }
+    
+    body {
+        background-color: #fff;
+        color: #333;
+    }
+    
+    .pink-text {
+        color: var(--pink-primary);
+    }
+    
+    .text-pink {
+        color: var(--pink-primary);
+    }
+    
+    .pink-link {
+        color: var(--pink-primary);
+        text-decoration: none;
+    }
+    
+    .pink-link:hover {
+        color: var(--pink-dark);
+        text-decoration: underline;
+    }
+    
+    .btn-pink {
+        background-color: var(--pink-primary);
+        border-color: var(--pink-primary);
+        color: white;
+    }
+    
+    .btn-pink:hover {
+        background-color: var(--pink-dark);
+        border-color: var(--pink-dark);
+        color: white;
+    }
+    
+    .btn-outline-pink {
+        border-color: var(--pink-primary);
+        color: var(--pink-primary);
+    }
+    
+    .btn-outline-pink:hover {
+        background-color: var(--pink-primary);
+        color: white;
+    }
+    
+    .pink-light-bg {
+        background-color: var(--pink-light);
+    }
+    
+    .rounded-custom {
+        border-radius: 15px !important;
+    }
+    
+    .service-gallery img {
+        max-height: 400px;
+        object-fit: contain;
+        width: 100%;
+    }
+    
+    .star-rating-label {
+        cursor: pointer;
+        font-size: 1.25rem;
+        padding: 0 0.2rem;
+    }
+    
+    .star-rating-label:hover,
+    .star-rating-label:hover ~ .star-rating-label,
+    input:checked ~ .star-rating-label {
+        content: "\f005";
+        font-weight: 900;
+    }
+    
+    .rating-input {
+        display: flex;
+        flex-direction: row-reverse;
+        justify-content: flex-end;
+    }
+    
+    .pink-tabs .nav-link {
+        color: #555;
+        border: none;
+        padding: 0.5rem 1rem;
+        margin-right: 0.5rem;
+        border-radius: 10px 10px 0 0;
+    }
+    
+    .pink-tabs .nav-link.active {
+        color: var(--pink-primary);
+        border-bottom: 2px solid var(--pink-primary);
+        background-color: transparent;
+        font-weight: 600;
+    }
+    
+    .pink-tabs .nav-link:hover:not(.active) {
+        color: var(--pink-dark);
+    }
+    
+    .consultant-popup {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        width: 300px;
+        background: white;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        border-radius: 15px;
+        overflow: hidden;
+        z-index: 1000;
+    }
+
+    .consultant-header {
+        background: var(--pink-primary);
+        color: white;
+        padding: 10px 15px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .consultant-body {
+        padding: 15px;
+    }
+
+    .d-none {
+        display: none;
+    }
+    
+    /* Override default Bootstrap styles with pink theme */
+    .navbar {
+        background-color: white !important;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+    
+    .navbar-brand, .nav-link {
+        color: var(--pink-primary) !important;
+    }
+    
+    .nav-link:hover {
+        color: var(--pink-dark) !important;
+    }
+    
+    .dropdown-item:active {
+        background-color: var(--pink-primary);
+    }
+    
+    .card {
+        border-radius: 15px;
+    }
+    
+    .breadcrumb-item.active {
+        color: var(--pink-primary);
+    }
+</style>
+
+<script>
+    // Toggle consultant popup
+    function toggleConsultantPopup() {
+        const popup = document.getElementById('consultant-popup');
+        popup.classList.toggle('d-none');
+    }
+    
+    // Submit phone number
+    function submitPhoneNumber() {
+        const phoneNumber = document.getElementById('user-phone').value;
+        
+        if (phoneNumber) {
+            alert(`Спасибо! Мы перезвоним вам по номеру: ${phoneNumber}`);
+            toggleConsultantPopup();
+        } else {
+            alert('Пожалуйста, введите номер телефона.');
+        }
+    }
+    
+    // Star rating system
+    document.querySelectorAll('.star-rating-label').forEach(star => {
+        star.addEventListener('click', function() {
+            const rating = this.getAttribute('for').replace('star', '');
+            document.querySelectorAll('.star-rating-label').forEach(s => {
+                s.classList.remove('fas');
+                s.classList.add('far');
+            });
+            
+            for (let i = 1; i <= rating; i++) {
+                document.querySelector(`label[for="star${i}"]`).classList.remove('far');
+                document.querySelector(`label[for="star${i}"]`).classList.add('fas');
+            }
+        });
+    });
+    
+    // Review form submission
+    document.getElementById('review-form').addEventListener('submit', function(event) {
+        event.preventDefault();
+        
+        const name = document.getElementById('reviewer-name').value;
+        const text = document.getElementById('review-text').value;
+        const ratingInput = document.querySelector('input[name="rating"]:checked');
+        const rating = ratingInput ? parseInt(ratingInput.value) : 5;
+        
+        if (name && text) {
+            const reviewsContainer = document.getElementById('reviews-container');
+            
+            // Добавляем новый отзыв
+            const reviewElement = document.createElement('div');
+            reviewElement.classList.add('review', 'mb-3', 'p-3', 'border', 'rounded-custom', 'shadow-sm');
+            
+            let starsHtml = '';
+            for (let i = 1; i <= 5; i++) {
+                starsHtml += `<i class="${i <= rating ? 'fas' : 'far'} fa-star text-pink"></i>`;
+            }
+            
+            reviewElement.innerHTML = `
+                <div class="d-flex justify-content-between align-items-center mb-2">
+                    <h5 class="fs-6 mb-0">${name}</h5>
+                    <div class="rating">
+                        ${starsHtml}
+                    </div>
+                </div>
+                <p class="mb-0">${text}</p>
+            `;
+            reviewsContainer.prepend(reviewElement);
+            
+            // Очищаем форму
+            this.reset();
+            document.querySelectorAll('.star-rating-label').forEach(s => {
+                s.classList.remove('fas');
+                s.classList.add('far');
+            });
+        } else {
+            alert('Пожалуйста, заполните все поля.');
+        }
+    });
+</script> 

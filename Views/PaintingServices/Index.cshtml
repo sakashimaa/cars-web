@@ -1,0 +1,111 @@
+@model IEnumerable<cars_web.Models.PaintingService>
+
+@{
+    ViewData["Title"] = "Услуги покраски";
+}
+
+<div class="painting-services-heading text-center py-4 mb-5">
+    <h1 class="display-4 fw-bold">Услуги покраски</h1>
+    <p class="lead">Профессиональная покраска и полировка автомобилей</p>
+</div>
+
+<div class="service-filter mb-4">
+    <div class="container">
+        <div class="card border-0 shadow-sm">
+            <div class="card-body">
+                <div class="row align-items-center">
+                    <div class="col-md-3">
+                        <div class="form-floating mb-3 mb-md-0">
+                            <input type="text" class="form-control" id="search" placeholder="Поиск...">
+                            <label for="search">Поиск по названию</label>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-floating mb-3 mb-md-0">
+                            <select class="form-select" id="sort" aria-label="Сортировка">
+                                <option selected value="">Выберите...</option>
+                                <option value="name-asc">Название (А-Я)</option>
+                                <option value="name-desc">Название (Я-А)</option>
+                                <option value="price-asc">Цена (по возрастанию)</option>
+                                <option value="price-desc">Цена (по убыванию)</option>
+                            </select>
+                            <label for="sort">Сортировка</label>
+                        </div>
+                    </div>
+                    <div class="col-md-4"></div>
+                    <div class="col-md-2 d-grid">
+                        <button class="btn btn-primary">Применить</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="services-container">
+    <div class="container">
+        @if (!Model.Any())
+        {
+            <div class="alert alert-info text-center p-5">
+                <i class="fa-solid fa-paint-roller mb-3" style="font-size: 3rem;"></i>
+                <h4>Услуги покраски не найдены</h4>
+                <p>К сожалению, список услуг покраски пуст.</p>
+            </div>
+        }
+        else
+        {
+            <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4" id="services-grid">
+                @foreach (var service in Model)
+                {
+                    <div class="col service-item">
+                        <div class="card h-100 service-card border-0 shadow-sm">
+                            <div class="service-image-container">
+                                @if (service.BeforeAfterImages != null && service.BeforeAfterImages.Any())
+                                {
+                                    <img src="~/images/@service.BeforeAfterImages.First()" class="card-img-top" alt="@service.Name">
+                                }
+                                else
+                                {
+                                    <img src="~/images/painting-service-placeholder.jpg" class="card-img-top" alt="@service.Name">
+                                }
+                            </div>
+                            <div class="card-body">
+                                <h5 class="card-title">@service.Name</h5>
+                                <p class="card-text">@service.ShortDescription</p>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <span class="price-tag fw-bold">@service.Price ₽</span>
+                                    <span class="time-tag text-muted"><i class="fa-solid fa-clock me-1"></i>@service.EstimatedDays @(service.EstimatedDays == 1 ? "день" : (service.EstimatedDays < 5 ? "дня" : "дней"))</span>
+                                </div>
+                            </div>
+                            <div class="card-footer bg-transparent border-0 d-grid">
+                                <a asp-action="Details" asp-route-id="@service.Id" class="btn btn-outline-primary">Подробнее</a>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        }
+    </div>
+</div>
+
+<style>
+    .service-image-container {
+        height: 200px;
+        overflow: hidden;
+    }
+    
+    .service-image-container img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+    
+    .price-tag {
+        color: #ff6b6b;
+        font-size: 1.2rem;
+    }
+    
+    .time-tag {
+        font-size: 0.9rem;
+    }
+</style> 

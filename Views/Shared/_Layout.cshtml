@@ -1,0 +1,240 @@
+﻿@using Microsoft.AspNetCore.Http
+@inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - AutoHub</title>
+    <script type="importmap"></script>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/cars_web.styles.css" asp-append-version="true" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+</head>
+<body>
+    <header class="mb-5">
+        <nav class="navbar navbar-expand-lg">
+            <div class="container">
+                <a class="navbar-brand ps-0 me-auto" asp-area="" asp-controller="Home" asp-action="Index">
+                    <span class="text-pink">Авто</span><span>2в1</span>
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="navbar-collapse collapse d-lg-inline-flex justify-content-end">
+                    <ul class="navbar-nav">
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Автомобили
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <li><a class="dropdown-item" asp-controller="Cars" asp-action="Index">Каталог</a></li>
+                                <li><a class="dropdown-item" href="#">Поставщики</a></li>
+                                <li><a class="dropdown-item" href="#">Клиенты</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                СТО
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <li><a class="dropdown-item" asp-controller="Workers" asp-action="Index">Мастера</a></li>
+                                <li><a class="dropdown-item" asp-controller="Details" asp-action="Index">Запчасти</a></li>
+                                <li><a class="dropdown-item" asp-controller="Services" asp-action="Index">Услуги</a></li>
+                                <li><a class="dropdown-item" asp-controller="PaintingServices" asp-action="Index">Покраска Авто</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Архив
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <li><a class="dropdown-item" href="#">Покупки</a></li>
+                                <li><a class="dropdown-item" href="#">История услуг</a></li>
+                                <li><a class="dropdown-item" href="#">Архив Работников</a></li>
+                            </ul>
+                        </li>
+                        
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Контакт</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">О программе</a>
+                        </li>
+                        @if (Context.Session.GetString("JWTToken") != null)
+                        {
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <i class="fa-solid fa-user me-1"></i> @Context.Session.GetString("UserEmail")
+                                </a>
+                                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
+                                    <li>
+                                        <form asp-controller="Account" asp-action="Logout" method="post">
+                                            <button type="submit" class="dropdown-item">Выйти</button>
+                                        </form>
+                                    </li>
+                                </ul>
+                            </li>
+                        }
+                        else
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link" asp-controller="Account" asp-action="Login">Войти</a>
+                            </li>
+                        }
+                        
+                        <!-- Кнопка переключения темы -->
+                        <li class="nav-item ms-2">
+                            <button id="theme-toggle-btn" class="btn btn-sm theme-toggle-btn" onclick="toggleTheme()">
+                                <i id="theme-icon" class="fa-solid fa-mountain-sun"></i>
+                            </button>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <div class="container-fluid">
+        <div class="row">
+            <!-- Sidebar -->
+            <div class="sidebar col-auto px-0">
+                <div id="sidebar-nav" class="list-group border-0 rounded-0 text-sm-start">
+                    <a asp-controller="Cars" asp-action="Index" class="list-group-item border-0 d-inline-block text-truncate" data-bs-parent="#sidebar">
+                        <i class="fas fa-car fa-fw me-2"></i><span>Автомобили</span>
+                    </a>
+                    <a href="#" class="list-group-item border-0 d-inline-block text-truncate" data-bs-parent="#sidebar">
+                        <i class="fas fa-tools fa-fw me-2"></i><span>СТО</span>
+                    </a>
+                    <a href="#" class="list-group-item border-0 d-inline-block text-truncate" data-bs-parent="#sidebar">
+                        <i class="fa-solid fa-box-archive"></i><span>Архив</span>
+                    </a>
+                    <a href="#" class="list-group-item border-0 d-inline-block text-truncate" data-bs-parent="#sidebar">
+                        <i class="fa-solid fa-address-book"></i><span>Контакты</span>
+                    </a>
+                    <a href="#" class="list-group-item border-0 d-inline-block text-truncate" data-bs-parent="#sidebar">
+                        <i class="fa-solid fa-circle-info"></i><span>О программе</span>
+                    </a>
+                    <a asp-controller="Account" asp-action="Profile" class="list-group-item border-0 d-inline-block text-truncate" data-bs-parent="#sidebar">
+                        <i class="fa-solid fa-user"></i><span>Профиль</span>
+                    </a>
+                </div>
+            </div>
+            <!-- Main content -->
+            <div class="col content-wrapper py-4">
+                <main role="main" class="pb-3">
+                    @RenderBody()
+                </main>
+            </div>
+        </div>
+    </div>
+
+    <footer class="py-5 footer-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4 mb-4 mb-md-0">
+                    <h5 class="text-pink mb-4">Авто 2 в 1</h5>
+                    <p class="mb-3">Профессиональные услуги для вашего автомобиля: от покупки и ремонта до ухода и модификации.</p>
+                    <div class="social-icons">
+                        <a href="https://vk.com/" target="_blank" class="social-icon" title="ВКонтакте">
+                            <i class="fab fa-vk"></i>
+                        </a>
+                        <a href="https://t.me/" target="_blank" class="social-icon" title="Telegram">
+                            <i class="fab fa-telegram"></i>
+                        </a>
+                        <a href="https://instagram.com/" target="_blank" class="social-icon" title="Instagram">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4 mb-md-0">
+                    <h5 class="text-pink mb-4">Быстрые ссылки</h5>
+                    <ul class="footer-links">
+                        <li><a asp-controller="Cars" asp-action="Index">Каталог автомобилей</a></li>
+                        <li><a asp-controller="Workers" asp-action="Index">Наши специалисты</a></li>
+                        <li><a asp-controller="Services" asp-action="Index">Услуги автосервиса</a></li>
+                        <li><a asp-controller="PaintingServices" asp-action="Index">Покраска автомобилей</a></li>
+                        <li><a asp-controller="Details" asp-action="Index">Запчасти</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-4">
+                    <h5 class="text-pink mb-4">Контакты</h5>
+                    <div class="contact-info">
+                        <p><i class="fas fa-map-marker-alt me-2"></i> г. Москва, ул. Пушкина - Колотушкиа 32</p>
+                        <p><i class="fas fa-phone me-2"></i> +7 (495) 123-45-67</p>
+                        <p><i class="fas fa-envelope me-2"></i> info@автосервис.рф</p>
+                        <p><i class="fas fa-clock me-2"></i> Пн-Пт: 09:00 - 20:00, Сб-Вс: 10:00 - 18:00</p>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom mt-4 pt-4 border-top">
+                <div class="row">
+                    <div class="col-md-6">
+                        <p class="mb-0">&copy; 2025 Авто2в1. Все права защищены.</p>
+                    </div>
+                    <div class="col-md-6 text-md-end">
+                        <a href="#">Политика конфиденциальности</a>
+                        <span class="mx-2">|</span>
+                        <a href="#">Условия использования</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+    
+    <script>
+        // Функция для установки темы
+        function setTheme(themeName) {
+            localStorage.setItem('theme', themeName);
+            document.documentElement.setAttribute('data-theme', themeName);
+            
+            // Обновляем иконку кнопки
+            const themeIcon = document.getElementById('theme-icon');
+            if (themeIcon) {
+                if (themeName === 'dark') {
+                    themeIcon.classList.remove('fa-mountain-sun');
+                    themeIcon.classList.add('fa-moon');
+                } else {
+                    themeIcon.classList.remove('fa-moon');
+                    themeIcon.classList.add('fa-mountain-sun');
+                }
+            }
+        }
+
+        // Функция для переключения темы
+        function toggleTheme() {
+            const currentTheme = localStorage.getItem('theme') || 'light';
+            if (currentTheme === 'light') {
+                setTheme('dark');
+            } else {
+                setTheme('light');
+            }
+        }
+
+        // Инициализация темы при загрузке страницы
+        (function() {
+            // Проверяем сохраненную тему в localStorage
+            const savedTheme = localStorage.getItem('theme');
+            
+            // Если тема сохранена, используем её, иначе устанавливаем светлую тему по умолчанию
+            if (savedTheme) {
+                setTheme(savedTheme);
+            } else {
+                // Проверяем предпочтения системы
+                if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+                    setTheme('dark');
+                } else {
+                    setTheme('light');
+                }
+            }
+        })();
+    </script>
+</body>
+</html>

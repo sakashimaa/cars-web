@@ -1,0 +1,290 @@
+@model cars_web.Models.PaintingService
+
+@{
+    ViewData["Title"] = Model.Name;
+}
+
+@{
+    var painEnumerateMapping = new Dictionary<string, string>()
+        {
+            {"FULL_BODY", "Полная покраска кузова"},
+            {"PARTIAL", "Частичная покраска кузова"},
+            {"REPAIR", "Ремонт повреждений"},
+            {"CUSTOM", "Покраска по индивидуальному заказу"}
+        };
+}
+
+<div class="painting-service-details-container py-5">
+    <div class="container">
+        <nav aria-label="breadcrumb" class="mb-4">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">Главная</a></li>
+                <li class="breadcrumb-item"><a asp-controller="PaintingServices" asp-action="Index">Услуги покраски</a></li>
+                <li class="breadcrumb-item active" aria-current="page">@Model.Name</li>
+            </ol>
+        </nav>
+
+        <div class="row">
+            <div class="col-lg-7 mb-4 mb-lg-0">
+                <div class="card border-0 shadow-sm painting-gallery rounded">
+                    <div id="paintingCarousel" class="carousel slide" data-bs-ride="carousel">
+                        <div class="carousel-inner">
+                            @if (Model.BeforeAfterImages != null && Model.BeforeAfterImages.Any())
+                            {
+                                @for (int i = 0; i < Model.BeforeAfterImages.Count; i++)
+                                {
+                                    <div class="carousel-item @(i == 0 ? "active" : "")">
+                                        <img src="~/images/@Model.BeforeAfterImages[i]" class="d-block w-100" alt="@Model.Name">
+                                    </div>
+                                }
+                            }
+                            else
+                            {
+                                <div class="carousel-item active">
+                                    <img src="~/images/painting-service-placeholder.jpg" class="d-block w-100" alt="@Model.Name">
+                                </div>
+                            }
+                        </div>
+                        @if (Model.BeforeAfterImages != null && Model.BeforeAfterImages.Count > 1)
+                        {
+                            <button class="carousel-control-prev" type="button" data-bs-target="#paintingCarousel" data-bs-slide="prev">
+                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                <span class="visually-hidden">Previous</span>
+                            </button>
+                            <button class="carousel-control-next" type="button" data-bs-target="#paintingCarousel" data-bs-slide="next">
+                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                <span class="visually-hidden">Next</span>
+                            </button>
+                        }
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-5">
+                <div class="card border-0 shadow-sm h-100">
+                    <div class="card-body">
+                        <h1 class="card-title fs-2 fw-bold mb-3">@Model.Name</h1>
+                        <p class="card-subtitle mb-3 text-muted">@Model.ShortDescription</p>
+                        
+                        <div class="service-details mb-4">
+                            <div class="d-flex justify-content-between align-items-center mb-2">
+                                <span class="fw-bold">Цена:</span>
+                                <span class="fs-4 text-primary">@Model.Price ₽</span>
+                            </div>
+                            <div class="d-flex justify-content-between align-items-center mb-2">
+                                <span class="fw-bold">Тип покраски:</span>
+                                <span>@painEnumerateMapping[Model.Type]</span>
+                            </div>
+                            <div class="d-flex justify-content-between align-items-center mb-2">
+                                <span class="fw-bold">Срок выполнения:</span>
+                                <span>@Model.EstimatedDays @(Model.EstimatedDays == 1 ? "день" : (Model.EstimatedDays < 5 ? "дня" : "дней"))</span>
+                            </div>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <span class="fw-bold">Гарантия:</span>
+                                <span>@Model.WarrantyMonths @(Model.WarrantyMonths == 1 ? "месяц" : (Model.WarrantyMonths < 5 ? "месяца" : "месяцев"))</span>
+                            </div>
+                        </div>
+                        
+                        <div class="service-actions d-grid gap-2">
+                            <button class="btn btn-primary btn-lg" onclick="toggleConsultantPopup()">Заказать</button>
+                            <button class="btn btn-outline-primary">Заказать звонок</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mt-4">
+            <div class="col-12">
+                <div class="card border-0 shadow-sm">
+                    <div class="card-body">
+                        <ul class="nav nav-tabs" id="serviceTabs" role="tablist">
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link active" id="description-tab" data-bs-toggle="tab" data-bs-target="#description" type="button" role="tab" aria-controls="description" aria-selected="true">Описание</button>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link" id="requirements-tab" data-bs-toggle="tab" data-bs-target="#requirements" type="button" role="tab" aria-controls="requirements" aria-selected="false">Требования</button>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link" id="reviews-tab" data-bs-toggle="tab" data-bs-target="#reviews" type="button" role="tab" aria-controls="reviews" aria-selected="false">Отзывы</button>
+                            </li>
+                        </ul>
+                        <div class="tab-content py-3" id="serviceTabsContent">
+                            <div class="tab-pane fade show active" id="description" role="tabpanel" aria-labelledby="description-tab">
+                                <p>@Model.LongDescription</p>
+                            </div>
+                            <div class="tab-pane fade" id="requirements" role="tabpanel" aria-labelledby="requirements-tab">
+                                <h4 class="fs-5 mb-3">Дополнительные требования:</h4>
+                                <p>@(string.IsNullOrEmpty(Model.AdditionalRequirements) ? "Для данной услуги нет дополнительных требований." : Model.AdditionalRequirements)</p>
+                                
+                                <h4 class="fs-5 mb-3 mt-4">Этапы работы:</h4>
+                                <ol>
+                                    <li class="mb-2">Предварительная оценка и диагностика автомобиля</li>
+                                    <li class="mb-2">Подготовка поверхности к покраске</li>
+                                    <li class="mb-2">Покраска в профессиональной камере</li>
+                                    <li class="mb-2">Сушка и полировка</li>
+                                    <li>Финальная проверка качества</li>
+                                </ol>
+                            </div>
+                            <div class="tab-pane fade" id="reviews" role="tabpanel" aria-labelledby="reviews-tab">
+                                <div id="reviews-container">
+                                    @if (Model.Reviews != null && Model.Reviews.Any())
+                                    {
+                                        @foreach (var review in Model.Reviews)
+                                        {
+                                            <div class="review mb-3 p-3 border rounded shadow-sm">
+                                                <p class="mb-0">@review</p>
+                                            </div>
+                                        }
+                                    }
+                                    else
+                                    {
+                                        <div class="text-center py-5">
+                                            <i class="fa-solid fa-comments mb-3" style="font-size: 3rem;"></i>
+                                            <h4>Отзывов пока нет</h4>
+                                            <p>Будьте первым, кто оставит отзыв об этой услуге!</p>
+                                        </div>
+                                    }
+                                </div>
+                                <div class="add-review mt-4">
+                                    <h4 class="fs-5">Оставить отзыв</h4>
+                                    <form id="review-form">
+                                        <div class="mb-3">
+                                            <label for="review-text" class="form-label">Ваш отзыв</label>
+                                            <textarea id="review-text" class="form-control" rows="4" placeholder="Поделитесь вашим опытом..." required></textarea>
+                                        </div>
+                                        <button type="submit" class="btn btn-primary">Отправить</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mt-4">
+            <div class="col-12">
+                <a asp-action="Index" class="btn btn-outline-secondary">
+                    <i class="fas fa-arrow-left me-2"></i>Вернуться к списку услуг
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="consultant-popup" class="consultant-popup d-none">
+    <div class="consultant-header">
+        <h5>Заказать услугу</h5>
+        <button type="button" class="btn-close" onclick="toggleConsultantPopup()"></button>
+    </div>
+    <div class="consultant-body">
+        <p>Пожалуйста, введите ваш номер телефона, чтобы мы могли связаться с вами:</p>
+        <input type="text" id="user-phone" class="form-control" placeholder="Ваш номер телефона">
+        <button class="btn btn-primary mt-2" onclick="submitPhoneNumber('@ViewData["Token"]')">Отправить</button>
+    </div>
+</div>
+
+<script>
+    function toggleConsultantPopup() {
+        const popup = document.getElementById('consultant-popup');
+        popup.classList.toggle('d-none');
+    };
+
+    async function submitPhoneNumber(token) {
+        const phoneNumber = document.getElementById('user-phone').value;
+        if (phoneNumber) {
+            try {
+                const response = await fetch('http://localhost:3002/tasks', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${token}`
+                    },
+                    body: JSON.stringify({
+                        name: `Запрос на услугу покраски (клиент с номером ${phoneNumber})`,
+                        description: `Клиент интересуется услугой "@Html.Raw(Json.Serialize(Model.Name))" по цене @Model.Price ₽`
+                    })
+                });
+                if (response.ok) {
+                    alert('Ваш номер успешно отправлен. Мы свяжемся с вами в ближайшее время!');
+                } else {
+                    alert('Произошла ошибка при отправке запроса.');
+                }
+            } catch (error) {
+                console.error('Ошибка:', error.message);
+                alert('Произошла ошибка при отправке запроса.');
+            }
+            toggleConsultantPopup();
+        } else {
+            alert('Пожалуйста, введите номер телефона.');
+        }
+    }
+
+    // Add event listener for the review form
+    document.getElementById('review-form').addEventListener('submit', function(event) {
+        event.preventDefault();
+        
+        const reviewText = document.getElementById('review-text').value;
+        
+        if (reviewText) {
+            const reviewsContainer = document.getElementById('reviews-container');
+            
+            // Remove empty state if it exists
+            const emptyState = reviewsContainer.querySelector('.text-center');
+            if (emptyState) {
+                emptyState.remove();
+            }
+            
+            // Add the new review
+            const reviewElement = document.createElement('div');
+            reviewElement.classList.add('review', 'mb-3', 'p-3', 'border', 'rounded', 'shadow-sm');
+            reviewElement.innerHTML = `<p class="mb-0">${reviewText}</p>`;
+            reviewsContainer.appendChild(reviewElement);
+            
+            // Clear the form
+            document.getElementById('review-form').reset();
+        } else {
+            alert('Пожалуйста, введите текст отзыва.');
+        }
+    });
+</script>
+
+<style>
+    .consultant-popup {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        width: 300px;
+        background: white;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        border-radius: 8px;
+        overflow: hidden;
+        z-index: 1000;
+    }
+
+    .consultant-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 10px 15px;
+        background: #f8f9fa;
+        border-bottom: 1px solid #eee;
+    }
+
+    .consultant-header h5 {
+        margin: 0;
+    }
+
+    .consultant-body {
+        padding: 15px;
+    }
+
+    .painting-gallery img {
+        height: 400px;
+        object-fit: cover;
+    }
+
+    .carousel-inner {
+        border-radius: 8px;
+    }
+</style> 

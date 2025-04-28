@@ -1,0 +1,52 @@
+﻿@model ErrorViewModel
+@{
+    ViewData["Title"] = "Error";
+}
+
+<div class="error-container py-5">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="card border-0 shadow-sm">
+                    <div class="card-body p-4 text-center">
+                        <div class="mb-4">
+                            <i class="fas fa-exclamation-triangle text-danger" style="font-size: 4rem;"></i>
+                        </div>
+                        
+                        <h1 class="text-danger mb-3">Произошла ошибка</h1>
+                        
+                        @if (ViewBag.ErrorMessage != null)
+                        {
+                            <div class="alert alert-danger">
+                                <p class="mb-0">@ViewBag.ErrorMessage</p>
+                            </div>
+                        }
+                        else
+                        {
+                            <h2 class="text-danger">Произошла ошибка при обработке вашего запроса.</h2>
+                        }
+                        
+                        @if (Model != null && Model.ShowRequestId)
+                        {
+                            <p class="mt-3">
+                                <strong>ID запроса:</strong> <code>@Model.RequestId</code>
+                            </p>
+                        }
+                        
+                        @if (ViewBag.DetailedError != null && Context.Request.Host.Value.Contains("localhost"))
+                        {
+                            <div class="alert alert-info mt-3 text-start">
+                                <h4>Подробная информация об ошибке (отображается только в разработке):</h4>
+                                <pre class="mb-0">@ViewBag.DetailedError</pre>
+                            </div>
+                        }
+                        
+                        <div class="mt-4">
+                            <a href="/" class="btn btn-primary">Вернуться на главную</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

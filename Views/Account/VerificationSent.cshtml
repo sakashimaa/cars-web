@@ -1,0 +1,51 @@
+@{
+    ViewData["Title"] = "Проверьте вашу электронную почту";
+}
+
+<div class="auth-container py-5">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="card border-0 shadow-sm">
+                    <div class="card-body p-4 text-center">
+                        <div class="mb-4">
+                            <i class="fa-solid fa-envelope-circle-check text-primary" style="font-size: 5rem;"></i>
+                        </div>
+                        
+                        <h2 class="mb-3">Проверьте вашу почту</h2>
+                        
+                        @if (TempData["SuccessMessage"] != null)
+                        {
+                            <div class="alert alert-success">
+                                @TempData["SuccessMessage"]
+                            </div>
+                        }
+                        
+                        @if (TempData["ErrorMessage"] != null)
+                        {
+                            <div class="alert alert-danger">
+                                @TempData["ErrorMessage"]
+                            </div>
+                        }
+                        
+                        <p class="lead mb-2">
+                            На ваш email <strong>@ViewBag.Email</strong> отправлено письмо со ссылкой для подтверждения регистрации.
+                        </p>
+                        <p class="mb-4">
+                            Пожалуйста, проверьте вашу почту и перейдите по ссылке, указанной в письме.
+                        </p>
+                        
+                        <div class="alert alert-info">
+                            <p class="mb-0">Не получили письмо? Проверьте папку "Спам" или попробуйте <a asp-action="ResendVerification" class="alert-link">отправить письмо повторно</a>.</p>
+                        </div>
+                        
+                        <div class="mt-4">
+                            <a asp-controller="Home" asp-action="Index" class="btn btn-outline-primary">Вернуться на главную</a>
+                            <a asp-controller="Account" asp-action="Login" class="btn btn-outline-secondary ms-2">На страницу входа</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div> 

@@ -1,0 +1,273 @@
+@model cars_web.Models.Detail
+
+@{
+    ViewData["Title"] = Model.Name;
+}
+
+<div class="detail-container py-5">
+    <div class="container">
+        <nav aria-label="breadcrumb" class="mb-4">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">Главная</a></li>
+                <li class="breadcrumb-item"><a asp-controller="Details" asp-action="Index">Запчасти</a></li>
+                <li class="breadcrumb-item active" aria-current="page">@Model.Name</li>
+            </ol>
+        </nav>
+
+        <div class="row">
+            <div class="col-lg-6 mb-4 mb-lg-0">
+                <div class="card border-0 shadow-sm detail-gallery">
+                    @if (!string.IsNullOrEmpty(Model.ImagePath))
+                    {
+                        <img src="~/images/@Model.ImagePath" class="img-fluid rounded" alt="@Model.Name">
+                    }
+                    else
+                    {
+                        <img src="~/images/detail-placeholder.jpg" class="img-fluid rounded" alt="@Model.Name">
+                    }
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="card border-0 shadow-sm">
+                    <div class="card-body">
+                        <h1 class="card-title fs-2 fw-bold mb-3">@Model.Name</h1>
+                        
+                        <div class="d-flex mb-4">
+                            <span class="badge bg-primary me-2">@Model.DetailCategory</span>
+                            <span class="badge bg-secondary">@Model.Creator</span>
+                        </div>
+                        
+                        <div class="detail-info mb-4">
+                            <p class="mb-2"><strong>Артикул:</strong> <span class="text-secondary">@Model.Article</span></p>
+                            <p class="mb-2"><strong>Код производителя:</strong> <span class="text-secondary">@Model.CreatorCode</span></p>
+                            <p class="mb-2"><strong>Наличие:</strong> <span class="text-success">@Model.Quantity шт.</span></p>
+                        </div>
+                        
+                        <div class="detail-price mb-4">
+                            <h3 class="fs-3 fw-bold text-primary">@Model.Price.ToString("N0") ₽</h3>
+                        </div>
+                        
+                        <div class="detail-actions d-grid gap-2">
+                            <div class="input-group mb-3">
+                                <span class="input-group-text">Количество</span>
+                                <input type="number" id="quantity" class="form-control" value="1" min="1" max="@Model.Quantity">
+                            </div>
+                            <button id="add-to-cart" class="btn btn-primary btn-lg" data-detail-id="@Model.Id">
+                                <i class="fas fa-shopping-cart me-2"></i>Добавить в корзину
+                            </button>
+                            <button class="btn btn-outline-primary">
+                                <i class="far fa-heart me-2"></i>Добавить в избранное
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="card border-0 shadow-sm mt-4">
+                    <div class="card-body">
+                        <h3 class="fs-5 mb-3">Доставка и оплата</h3>
+                        <ul class="list-unstyled mb-0">
+                            <li class="mb-2"><i class="fas fa-truck text-primary me-2"></i> Доставка от 250 ₽</li>
+                            <li class="mb-2"><i class="fas fa-store text-primary me-2"></i> Самовывоз из магазина</li>
+                            <li class="mb-2"><i class="fas fa-credit-card text-primary me-2"></i> Оплата картой или наличными</li>
+                            <li><i class="fas fa-shield-alt text-primary me-2"></i> Гарантия 14 дней</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mt-4">
+            <div class="col-12">
+                <div class="card border-0 shadow-sm">
+                    <div class="card-body">
+                        <ul class="nav nav-tabs" id="detailTabs" role="tablist">
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link active" id="description-tab" data-bs-toggle="tab" data-bs-target="#description" type="button" role="tab" aria-controls="description" aria-selected="true">Описание</button>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link" id="specifications-tab" data-bs-toggle="tab" data-bs-target="#specifications" type="button" role="tab" aria-controls="specifications" aria-selected="false">Характеристики</button>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link" id="reviews-tab" data-bs-toggle="tab" data-bs-target="#reviews" type="button" role="tab" aria-controls="reviews" aria-selected="false">Отзывы</button>
+                            </li>
+                        </ul>
+                        <div class="tab-content py-3" id="detailTabsContent">
+                            <div class="tab-pane fade show active" id="description" role="tabpanel" aria-labelledby="description-tab">
+                                <p>@Model.Name — высококачественная запчасть от производителя @Model.Creator. Артикул: @Model.Article.</p>
+                                <p>Данная деталь подходит для различных моделей автомобилей. Перед покупкой рекомендуем уточнить совместимость с вашим автомобилем у наших консультантов.</p>
+                            </div>
+                            <div class="tab-pane fade" id="specifications" role="tabpanel" aria-labelledby="specifications-tab">
+                                <div class="table-responsive">
+                                    <table class="table table-bordered">
+                                        <tbody>
+                                            <tr>
+                                                <th scope="row" class="bg-light">Название</th>
+                                                <td>@Model.Name</td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row" class="bg-light">Артикул</th>
+                                                <td>@Model.Article</td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row" class="bg-light">Код производителя</th>
+                                                <td>@Model.CreatorCode</td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row" class="bg-light">Производитель</th>
+                                                <td>@Model.Creator</td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row" class="bg-light">Категория</th>
+                                                <td>@Model.DetailCategory</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="tab-pane fade" id="reviews" role="tabpanel" aria-labelledby="reviews-tab">
+                                <div id="reviews-container">
+                                    <p class="text-muted">Отзывов пока нет</p>
+                                </div>
+                                <div class="add-review mt-4">
+                                    <h4 class="fs-5">Оставить отзыв</h4>
+                                    <form id="review-form">
+                                        <div class="mb-3">
+                                            <label for="reviewer-name" class="form-label">Ваше имя</label>
+                                            <input type="text" id="reviewer-name" class="form-control" placeholder="Введите ваше имя" required>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="review-text" class="form-label">Ваш отзыв</label>
+                                            <textarea id="review-text" class="form-control" rows="4" placeholder="Напишите ваш отзыв" required></textarea>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label class="form-label">Оценка</label>
+                                            <div class="rating-input">
+                                                @for (int i = 1; i <= 5; i++)
+                                                {
+                                                    <input type="radio" id="star@(i)" name="rating" value="@i" class="d-none" />
+                                                    <label for="star@(i)" class="far fa-star text-warning star-rating-label"></label>
+                                                }
+                                            </div>
+                                        </div>
+                                        <button type="submit" class="btn btn-primary">Отправить</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mt-4">
+            <div class="col-12">
+                <a asp-action="Index" class="btn btn-outline-secondary">
+                    <i class="fas fa-arrow-left me-2"></i>Вернуться к списку запчастей
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .detail-gallery img {
+        max-height: 400px;
+        object-fit: contain;
+        width: 100%;
+    }
+    
+    .star-rating-label {
+        cursor: pointer;
+        font-size: 1.25rem;
+        padding: 0 0.2rem;
+    }
+    
+    .star-rating-label:hover,
+    .star-rating-label:hover ~ .star-rating-label,
+    input:checked ~ .star-rating-label {
+        content: "\f005";
+        font-weight: 900;
+    }
+    
+    .rating-input {
+        display: flex;
+        flex-direction: row-reverse;
+        justify-content: flex-end;
+    }
+</style>
+
+<script>
+    // Add to cart functionality
+    document.getElementById('add-to-cart').addEventListener('click', function() {
+        const detailId = this.getAttribute('data-detail-id');
+        const quantity = document.getElementById('quantity').value;
+        
+        // Здесь будет функционал добавления в корзину
+        alert(`Товар добавлен в корзину (ID: ${detailId}, Количество: ${quantity})`);
+    });
+    
+    // Star rating system
+    document.querySelectorAll('.star-rating-label').forEach(star => {
+        star.addEventListener('click', function() {
+            const rating = this.getAttribute('for').replace('star', '');
+            document.querySelectorAll('.star-rating-label').forEach(s => {
+                s.classList.remove('fas');
+                s.classList.add('far');
+            });
+            
+            for (let i = 1; i <= rating; i++) {
+                document.querySelector(`label[for="star${i}"]`).classList.remove('far');
+                document.querySelector(`label[for="star${i}"]`).classList.add('fas');
+            }
+        });
+    });
+    
+    // Review form submission
+    document.getElementById('review-form').addEventListener('submit', function(event) {
+        event.preventDefault();
+        
+        const name = document.getElementById('reviewer-name').value;
+        const text = document.getElementById('review-text').value;
+        const ratingInput = document.querySelector('input[name="rating"]:checked');
+        const rating = ratingInput ? parseInt(ratingInput.value) : 5;
+        
+        if (name && text) {
+            const reviewsContainer = document.getElementById('reviews-container');
+            
+            // Удаляем сообщение о том, что отзывов нет
+            const noReviewsMessage = reviewsContainer.querySelector('.text-muted');
+            if (noReviewsMessage) {
+                noReviewsMessage.remove();
+            }
+            
+            // Добавляем новый отзыв
+            const reviewElement = document.createElement('div');
+            reviewElement.classList.add('review', 'mb-3', 'p-3', 'border', 'rounded', 'shadow-sm');
+            
+            let starsHtml = '';
+            for (let i = 1; i <= 5; i++) {
+                starsHtml += `<i class="${i <= rating ? 'fas' : 'far'} fa-star text-warning"></i>`;
+            }
+            
+            reviewElement.innerHTML = `
+                <div class="d-flex justify-content-between align-items-center mb-2">
+                    <h5 class="fs-6 mb-0">${name}</h5>
+                    <div class="rating">
+                        ${starsHtml}
+                    </div>
+                </div>
+                <p class="mb-0">${text}</p>
+            `;
+            reviewsContainer.appendChild(reviewElement);
+            
+            // Очищаем форму
+            this.reset();
+            document.querySelectorAll('.star-rating-label').forEach(s => {
+                s.classList.remove('fas');
+                s.classList.add('far');
+            });
+        } else {
+            alert('Пожалуйста, заполните все поля.');
+        }
+    });
+</script> 

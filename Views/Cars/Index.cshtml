@@ -1,0 +1,166 @@
+@model IEnumerable<cars_web.Models.Car>
+
+@{
+    ViewData["Title"] = "Каталог автомобилей";
+}
+
+<div class="cars-heading text-center py-4 mb-5">
+    <h1 class="display-4 fw-bold">Каталог автомобилей</h1>
+    <p class="lead">Выберите автомобиль из нашей коллекции</p>
+</div>
+
+<div class="car-filter mb-4">
+    <div class="container">
+        <div class="card border-0 shadow-sm">
+            <div class="card-body">
+                <div class="row align-items-center">
+                    <div class="col-md-3">
+                        <div class="form-floating mb-3 mb-md-0">
+                            <input type="text" class="form-control" id="search" placeholder="Поиск...">
+                            <label for="search">Поиск по названию</label>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-floating mb-3 mb-md-0">
+                            <select class="form-select" id="sort" aria-label="Сортировка">
+                                <option selected value="">Выберите...</option>
+                                <option value="price-asc">Цена (по возрастанию)</option>
+                                <option value="price-desc">Цена (по убыванию)</option>
+                                <option value="name-asc">Название (А-Я)</option>
+                                <option value="name-desc">Название (Я-А)</option>
+                            </select>
+                            <label for="sort">Сортировка</label>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="row">
+                            <div class="col-6">
+                                <div class="form-floating mb-3 mb-md-0">
+                                    <input type="number" class="form-control" id="price-min">
+                                    <label for="price-min">Мин. цена</label>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="form-floating mb-3 mb-md-0">
+                                    <input type="number" class="form-control" id="price-max">
+                                    <label for="price-max">Макс. цена</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-2 d-grid">
+                        <button class="btn btn-primary h-100" type="button" id="filter-button">Применить фильтр</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="cars-container">
+    <div class="container">
+        @if (!Model.Any())
+        {
+            <div class="alert alert-info text-center p-5">
+                <i class="fa-solid fa-car-side mb-3" style="font-size: 3rem;"></i>
+                <h4>Автомобили не найдены</h4>
+                <p>К сожалению, в данный момент нет доступных автомобилей. Пожалуйста, проверьте позже.</p>
+            </div>
+        }
+        else
+        {
+            <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4" id="cars-grid">
+                @foreach (var car in Model)
+                {
+                    <div class="col car-item">
+                        <div class="card h-100 car-card border-0 shadow-sm">
+                            <div class="car-image-container">
+                                @if (!string.IsNullOrEmpty(car.ImagePath))
+                                {
+                                    <img src="~/images/@car.ImagePath" class="card-img-top" alt="@car.Name">
+                                }
+                                else
+                                {
+                                    <img src="~/images/car-placeholder.jpg" class="card-img-top" alt="@car.Name">
+                                }
+                                @if (car.Price.HasValue)
+                                {
+                                    <div class="car-price">@(car.Price.Value.ToString("N0")) ₽</div>
+                                }
+                            </div>
+                            <div class="card-body">
+                                <h5 class="card-title">@car.Name</h5>
+                                @if (!string.IsNullOrEmpty(car.ShortDescription))
+                                {
+                                    <p class="card-text">@car.ShortDescription</p>
+                                }
+                            </div>
+                            <div class="card-footer bg-transparent border-0 d-grid">
+                                <a asp-action="Details" asp-route-id="@car.Id" class="btn btn-outline-primary">Подробнее</a>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        }
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        $(document).ready(function() {
+            // Simple client-side filtering
+            $("#filter-button").click(function() {
+                const searchTerm = $("#search").val().toLowerCase();
+                const minPrice = $("#price-min").val() ? parseFloat($("#price-min").val()) : 0;
+                const maxPrice = $("#price-max").val() ? parseFloat($("#price-max").val()) : Number.MAX_SAFE_INTEGER;
+                const sortOption = $("#sort").val();
+                
+                $(".car-item").each(function() {
+                    const card = $(this);
+                    const title = card.find(".card-title").text().toLowerCase();
+                    const price = card.find(".car-price").text();
+                    const priceValue = price ? parseFloat(price.replace(/[^\d.-]/g, '')) : 0;
+                    
+                    const matchesSearch = title.includes(searchTerm);
+                    const matchesPrice = priceValue >= minPrice && priceValue <= maxPrice;
+                    
+                    if (matchesSearch && matchesPrice) {
+                        card.show();
+                    } else {
+                        card.hide();
+                    }
+                });
+                
+                // Sort logic
+                if (sortOption) {
+                    const carItems = $(".car-item").get();
+                    carItems.sort(function(a, b) {
+                        const priceA = $(a).find(".car-price").text() ? 
+                            parseFloat($(a).find(".car-price").text().replace(/[^\d.-]/g, '')) : 0;
+                        const priceB = $(b).find(".car-price").text() ? 
+                            parseFloat($(b).find(".car-price").text().replace(/[^\d.-]/g, '')) : 0;
+                        const nameA = $(a).find(".card-title").text().toLowerCase();
+                        const nameB = $(b).find(".card-title").text().toLowerCase();
+                        
+                        if (sortOption === "price-asc") {
+                            return priceA - priceB;
+                        } else if (sortOption === "price-desc") {
+                            return priceB - priceA;
+                        } else if (sortOption === "name-asc") {
+                            return nameA.localeCompare(nameB);
+                        } else if (sortOption === "name-desc") {
+                            return nameB.localeCompare(nameA);
+                        }
+                        return 0;
+                    });
+                    
+                    const carsGrid = $("#cars-grid");
+                    $.each(carItems, function(i, item) {
+                        carsGrid.append(item);
+                    });
+                }
+            });
+        });
+    </script>
+} 
