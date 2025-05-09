@@ -1,0 +1,54 @@
+@model cars_web.Models.UserUpdateModel
+
+@{
+    ViewData["Title"] = "Редактирование пользователя";
+    int userId = ViewBag.UserId;
+}
+
+<div class="container-fluid py-4">
+    <div class="row mb-4 align-items-center">
+        <div class="col">
+            <h1 class="mb-0">Редактирование пользователя</h1>
+        </div>
+        <div class="col-auto">
+            <a asp-action="UserDetails" asp-route-id="@userId" class="btn btn-outline-secondary">
+                <i class="fas fa-arrow-left me-1"></i> Назад
+            </a>
+        </div>
+    </div>
+
+    <div class="card shadow-sm">
+        <div class="card-body">
+            <form asp-action="EditUser" asp-route-id="@userId" method="post">
+                <div asp-validation-summary="ModelOnly" class="alert alert-danger"></div>
+                
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <div class="form-floating mb-3">
+                            <input asp-for="FirstName" class="form-control" placeholder="Имя" />
+                            <label asp-for="FirstName">Имя</label>
+                            <span asp-validation-for="FirstName" class="text-danger"></span>
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-6 mb-3">
+                        <div class="form-floating mb-3">
+                            <input asp-for="LastName" class="form-control" placeholder="Фамилия" />
+                            <label asp-for="LastName">Фамилия</label>
+                            <span asp-validation-for="LastName" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="d-flex justify-content-end gap-2 mt-4">
+                    <a asp-action="UserDetails" asp-route-id="@userId" class="btn btn-outline-secondary">Отмена</a>
+                    <button type="submit" class="btn btn-primary">Сохранить</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+} 

@@ -1,0 +1,66 @@
+@model cars_web.Models.AdminLoginModel
+
+@{
+    ViewData["Title"] = "Вход в панель администратора";
+}
+
+<div class="auth-container py-5">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="card border-0 shadow-sm">
+                    <div class="card-body p-4">
+                        <h2 class="text-center mb-4">Вход в панель администратора</h2>
+                        
+                        @if (TempData["SuccessMessage"] != null)
+                        {
+                            <div class="alert alert-success">
+                                @TempData["SuccessMessage"]
+                            </div>
+                        }
+                        
+                        @if (TempData["ErrorMessage"] != null)
+                        {
+                            <div class="alert alert-danger">
+                                @TempData["ErrorMessage"]
+                            </div>
+                        }
+                        
+                        <form asp-action="Login" asp-controller="Admin" method="post">
+                            <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+                            @Html.AntiForgeryToken()
+                            
+                            <div class="form-floating mb-3">
+                                <input asp-for="Username" class="form-control" placeholder="admin" />
+                                <label asp-for="Username">Имя пользователя</label>
+                                <span asp-validation-for="Username" class="text-danger"></span>
+                            </div>
+                            
+                            <div class="form-floating mb-4">
+                                <input asp-for="Password" class="form-control" type="password" placeholder="Пароль" />
+                                <label asp-for="Password">Пароль</label>
+                                <span asp-validation-for="Password" class="text-danger"></span>
+                            </div>
+                            
+                            <div class="d-grid mb-3">
+                                <button type="submit" class="btn btn-primary btn-lg">Войти</button>
+                            </div>
+                            
+                            <div class="text-center">
+                                <p class="mb-0">
+                                    <a asp-action="Login" asp-controller="Account" class="text-decoration-none">
+                                        Вернуться на страницу входа пользователей
+                                    </a>
+                                </p>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+} 

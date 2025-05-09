@@ -1,0 +1,122 @@
+@model cars_web.Models.WorkerViewModel
+
+@{
+    ViewData["Title"] = "Детали работника";
+}
+
+<div class="container-fluid py-4">
+    <div class="row mb-4 align-items-center">
+        <div class="col">
+            <h1 class="mb-0">Детали работника</h1>
+        </div>
+        <div class="col-auto">
+            <a asp-action="Workers" class="btn btn-outline-secondary me-2">
+                <i class="fas fa-arrow-left me-1"></i> Назад к списку
+            </a>
+            <a asp-action="EditWorker" asp-route-id="@Model.Id" class="btn btn-primary">
+                <i class="fas fa-edit me-1"></i> Редактировать
+            </a>
+        </div>
+    </div>
+
+    <div class="card shadow-sm mb-4">
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-4 mb-4 mb-md-0">
+                    @if (!string.IsNullOrEmpty(Model.ImagePath))
+                    {
+                        <img src="@Model.ImagePath" alt="@Model.Name" class="img-fluid rounded" />
+                    }
+                    else
+                    {
+                        <div class="bg-light d-flex justify-content-center align-items-center rounded" style="height: 300px;">
+                            <i class="fas fa-user-tie fa-4x text-muted"></i>
+                        </div>
+                    }
+                </div>
+                <div class="col-md-8">
+                    <h2 class="h3 mb-3">@Model.Name</h2>
+                    
+                    <div class="mb-3">
+                        <span class="badge bg-primary">@Model.Position</span>
+                    </div>
+                    
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <div class="mb-2">
+                                <strong>ID:</strong> @Model.Id
+                            </div>
+                            @if (Model.WorkTime.HasValue)
+                            {
+                                <div class="mb-2">
+                                    <strong>Рабочие часы:</strong> @Model.WorkTime часов
+                                </div>
+                            }
+                        </div>
+                        <div class="col-md-6">
+                            <div class="mb-2">
+                                <strong>Создан:</strong> @Model.CreatedAt.ToString("dd.MM.yyyy HH:mm")
+                            </div>
+                        </div>
+                    </div>
+                    
+                    @if (!string.IsNullOrEmpty(Model.ShortDescription))
+                    {
+                        <div class="mb-3">
+                            <h3 class="h5">Краткое описание</h3>
+                            <p>@Model.ShortDescription</p>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+
+    @if (!string.IsNullOrEmpty(Model.FullDescription))
+    {
+        <div class="card shadow-sm">
+            <div class="card-header">
+                <h3 class="h5 mb-0">Полное описание</h3>
+            </div>
+            <div class="card-body">
+                <div>@Html.Raw(Model.FullDescription)</div>
+            </div>
+        </div>
+    }
+    
+    <div class="d-flex justify-content-between mt-4">
+        <a asp-action="Workers" class="btn btn-outline-secondary">
+            <i class="fas fa-arrow-left me-1"></i> Назад к списку
+        </a>
+        <div>
+            <a asp-action="EditWorker" asp-route-id="@Model.Id" class="btn btn-primary me-2">
+                <i class="fas fa-edit me-1"></i> Редактировать
+            </a>
+            <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal">
+                <i class="fas fa-trash me-1"></i> Удалить
+            </button>
+        </div>
+    </div>
+</div>
+
+<!-- Модальное окно подтверждения удаления -->
+<div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="deleteModalLabel">Подтверждение удаления</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>Вы действительно хотите удалить работника <strong>@Model.Name</strong>?</p>
+                <p class="text-danger">Это действие нельзя отменить.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Отмена</button>
+                <form asp-action="DeleteWorker" asp-route-id="@Model.Id" method="post">
+                    <button type="submit" class="btn btn-danger">Удалить</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div> 

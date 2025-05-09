@@ -4,28 +4,43 @@
 
 <div class="main-content py-5">
     <div class="container">
-        <h1 class="display-3 fw-bold mb-5 text-center mt-5">Приложение "Автосалон 2 в 1"</h1>
+        <h1 class="display-4 fw-bold mb-5 text-center mt-4">Автомобильный сервис</h1>
+        
+        <!-- 3D Просмотр автомобиля -->
+        <div class="row mb-5">
+            <div class="col-lg-12">
+                <div class="card border-0 shadow-sm">
+                    <div class="card-body p-4">
+                        <h2 class="fw-bold mb-3">Просмотр 3D модели автомобиля</h2>
+                        <div id="car3DViewer" style="width: 100%; height: 500px; position: relative;"></div>
+                        <div class="mt-3 text-center">
+                            <p class="text-muted small">Используйте мышь для поворота модели, колесико для приближения/отдаления</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
         
         <div class="row mb-5">
             <div class="col-lg-12">
                 <div class="card border-0 shadow-sm">
                     <div class="card-body p-4">
                         <h2 class="fw-bold mb-3">Общая информация</h2>
-                        <p class="lead">Данное приложение предназначено для управления, а также в целом рабочего процесса Автосалона "2 в 1". Приложение предоставляет необходимый функционал для всех работников предприятия. За документацией и данными входа обращайтесь к системному администратору.</p>
+                        <p class="lead">Данное приложение предназначено для управления автомобильным салоном и сервисным центром. Система обеспечивает необходимый функционал для всех сотрудников предприятия, включая каталогизацию автомобилей, управление услугами и контроль выполняемых работ.</p>
                     </div>
                 </div>
             </div>
         </div>
         
-        <h2 class="fw-bold mb-4">Помощь по основным кнопкам</h2>
+        <h2 class="fw-bold mb-4">Основные разделы системы</h2>
         
         <div class="row g-4">
             <div class="col-md-6">
                 <div class="card border-0 shadow-sm h-100">
                     <div class="card-body p-4">
                         <div class="d-flex align-items-center mb-3">
-                            <div class="icon-container bg-primary text-white me-3">
-                                <i class="fas fa-car fa-fw"></i>
+                            <div class="icon-container me-3">
+                                <i class="fas fa-car-side fa-fw"></i>
                             </div>
                             <h4 class="mb-0">Автомобили</h4>
                         </div>
@@ -38,8 +53,8 @@
                 <div class="card border-0 shadow-sm h-100">
                     <div class="card-body p-4">
                         <div class="d-flex align-items-center mb-3">
-                            <div class="icon-container bg-primary text-white me-3">
-                                <i class="fas fa-tools fa-fw"></i>
+                            <div class="icon-container me-3">
+                                <i class="fas fa-wrench fa-fw"></i>
                             </div>
                             <h4 class="mb-0">СТО</h4>
                         </div>
@@ -52,8 +67,8 @@
                 <div class="card border-0 shadow-sm h-100">
                     <div class="card-body p-4">
                         <div class="d-flex align-items-center mb-3">
-                            <div class="icon-container bg-primary text-white me-3">
-                                <i class="fa-solid fa-box-archive"></i>
+                            <div class="icon-container me-3">
+                                <i class="fas fa-archive fa-fw"></i>
                             </div>
                             <h4 class="mb-0">Архив</h4>
                         </div>
@@ -66,8 +81,8 @@
                 <div class="card border-0 shadow-sm h-100">
                     <div class="card-body p-4">
                         <div class="d-flex align-items-center mb-3">
-                            <div class="icon-container bg-primary text-white me-3">
-                                <i class="fa-solid fa-address-book"></i>
+                            <div class="icon-container me-3">
+                                <i class="fas fa-phone fa-fw"></i>
                             </div>
                             <h4 class="mb-0">Контакты</h4>
                         </div>
@@ -80,8 +95,8 @@
                 <div class="card border-0 shadow-sm h-100">
                     <div class="card-body p-4">
                         <div class="d-flex align-items-center mb-3">
-                            <div class="icon-container bg-primary text-white me-3">
-                                <i class="fa-solid fa-circle-info"></i>
+                            <div class="icon-container me-3">
+                                <i class="fas fa-info-circle fa-fw"></i>
                             </div>
                             <h4 class="mb-0">О программе</h4>
                         </div>
@@ -94,8 +109,8 @@
                 <div class="card border-0 shadow-sm h-100">
                     <div class="card-body p-4">
                         <div class="d-flex align-items-center mb-3">
-                            <div class="icon-container bg-primary text-white me-3">
-                                <i class="fa-solid fa-user"></i>
+                            <div class="icon-container me-3">
+                                <i class="fas fa-user fa-fw"></i>
                             </div>
                             <h4 class="mb-0">Профиль</h4>
                         </div>

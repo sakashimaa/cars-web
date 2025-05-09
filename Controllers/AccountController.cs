@@ -59,8 +59,6 @@ namespace cars_web.Controllers
                 return View(model);
             }
 
-
-
             var token = await _authService.LoginAsync(model);
             if (token != null)
             {

@@ -1,0 +1,211 @@
+@model cars_web.Models.CarCreateModel
+
+@{
+    ViewData["Title"] = "Добавление автомобиля";
+}
+
+<div class="container-fluid py-4">
+    <div class="row mb-4 align-items-center">
+        <div class="col">
+            <h1 class="mb-0">Добавление автомобиля</h1>
+        </div>
+        <div class="col-auto">
+            <a asp-action="Cars" class="btn btn-outline-secondary">
+                <i class="fas fa-arrow-left me-1"></i> К списку автомобилей
+            </a>
+        </div>
+    </div>
+
+    <div class="card shadow-sm">
+        <div class="card-body">
+            <form asp-action="CreateCar" method="post">
+                <div asp-validation-summary="ModelOnly" class="alert alert-danger"></div>
+                @Html.AntiForgeryToken()
+                
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <div class="form-floating mb-3">
+                            <input asp-for="Name" class="form-control" placeholder="Название" />
+                            <label asp-for="Name">Название</label>
+                            <span asp-validation-for="Name" class="text-danger"></span>
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-6 mb-3">
+                        <div class="form-floating mb-3">
+                            <input asp-for="Price" class="form-control" placeholder="Цена" type="number" step="0.01" />
+                            <label asp-for="Price">Цена</label>
+                            <span asp-validation-for="Price" class="text-danger"></span>
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-6 mb-3">
+                        <div class="form-floating mb-3">
+                            <input asp-for="Quantity" class="form-control" placeholder="Количество" type="number" />
+                            <label asp-for="Quantity">Количество</label>
+                            <span asp-validation-for="Quantity" class="text-danger"></span>
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-6 mb-3">
+                        <div class="form-group">
+                            <label class="form-label">Изображение</label>
+                            <div class="input-group">
+                                <input asp-for="ImagePath" class="form-control" id="imagePath" placeholder="Путь к изображению" readonly />
+                                <label for="imageUpload" class="btn btn-outline-primary">Выбрать файл</label>
+                            </div>
+                            <span asp-validation-for="ImagePath" class="text-danger"></span>
+                            <input type="file" id="imageUpload" class="d-none" accept="image/*" />
+                            <div id="imagePreview" class="mt-2 d-none">
+                                <img src="" alt="Предпросмотр" class="img-thumbnail" style="max-height: 200px;" />
+                                <button type="button" class="btn btn-sm btn-outline-danger mt-1" id="removeImage">Удалить</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-12 mb-3">
+                        <div class="form-floating mb-3">
+                            <input asp-for="ShortDescription" class="form-control" placeholder="Краткое описание" />
+                            <label asp-for="ShortDescription">Краткое описание</label>
+                            <span asp-validation-for="ShortDescription" class="text-danger"></span>
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-12 mb-3">
+                        <div class="form-floating mb-3">
+                            <textarea asp-for="FullDescription" class="form-control" placeholder="Полное описание" style="height: 150px"></textarea>
+                            <label asp-for="FullDescription">Полное описание</label>
+                            <span asp-validation-for="FullDescription" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="d-flex justify-content-end gap-2 mt-4">
+                    <a asp-action="Cars" class="btn btn-outline-secondary">Отмена</a>
+                    <button type="submit" class="btn btn-primary" id="saveButton">Сохранить</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    
+    <script>
+        $(document).ready(function() {
+            // Добавляем скрытое поле с токеном для AJAX запросов
+            $('body').append('<input type="hidden" id="csrf-token" name="__RequestVerificationToken" value="' + $('input[name="__RequestVerificationToken"]').val() + '">');
+            
+            // Получаем токен защиты от CSRF
+            const token = $('#csrf-token').val();
+            
+            // Обработка загрузки изображения
+            $('#imageUpload').change(function() {
+                const file = this.files[0];
+                if (file) {
+                    const reader = new FileReader();
+                    reader.onload = function(e) {
+                        $('#imagePreview img').attr('src', e.target.result);
+                        $('#imagePreview').removeClass('d-none');
+                    }
+                    reader.readAsDataURL(file);
+                    
+                    // Загрузка файла на сервер
+                    uploadImage(file);
+                }
+            });
+            
+            // Удаление изображения
+            $('#removeImage').click(function() {
+                $('#imageUpload').val('');
+                $('#imagePath').val('');
+                $('#imagePreview').addClass('d-none');
+                $('#imagePreview img').attr('src', '');
+            });
+            
+            // Функция загрузки изображения на сервер
+            function uploadImage(file) {
+                const formData = new FormData();
+                formData.append('file', file);
+                
+                // Проверка наличия токена CSRF
+                const token = $('input[name="__RequestVerificationToken"]').val();
+                if (!token) {
+                    console.error('CSRF токен не найден');
+                    alert('Ошибка безопасности: CSRF токен не найден. Пожалуйста, обновите страницу.');
+                    return;
+                }
+                
+                formData.append('__RequestVerificationToken', token);
+                
+                // Добавим индикатор загрузки
+                $('#imagePreview').append('<div id="uploadProgress" class="mt-2">Загрузка изображения...</div>');
+                
+                $.ajax({
+                    url: '/admin/upload-image',
+                    type: 'POST',
+                    data: formData,
+                    processData: false,
+                    contentType: false,
+                    success: function(response) {
+                        $('#uploadProgress').remove();
+                        if (response.success) {
+                            $('#imagePath').val(response.imagePath);
+                            console.log('Изображение успешно загружено: ' + response.imagePath);
+                            
+                            // Предотвращаем исчезновение пути к изображению
+                            setTimeout(function() {
+                                if ($('#imagePath').val() === '') {
+                                    $('#imagePath').val(response.imagePath);
+                                }
+                            }, 500);
+                        } else {
+                            console.error('Ошибка при загрузке изображения: ' + (response.message || 'Неизвестная ошибка'));
+                            alert('Ошибка: ' + (response.message || 'Не удалось загрузить изображение'));
+                            // Возвращаем форму в исходное состояние
+                            $('#removeImage').click();
+                        }
+                    },
+                    error: function(xhr, status, error) {
+                        $('#uploadProgress').remove();
+                        console.error('Ошибка запроса: ' + status + ', ' + error);
+                        console.error('Ответ сервера:', xhr.responseText);
+                        
+                        let errorMessage = 'Ошибка загрузки изображения';
+                        try {
+                            if (xhr.responseJSON && xhr.responseJSON.message) {
+                                errorMessage = xhr.responseJSON.message;
+                            } else if (xhr.responseText) {
+                                // Попытка разобрать текст ответа как JSON
+                                const response = JSON.parse(xhr.responseText);
+                                if (response.message) {
+                                    errorMessage = response.message;
+                                }
+                            }
+                        } catch (e) {
+                            console.error('Не удалось разобрать ответ сервера', e);
+                        }
+                        
+                        alert('Ошибка: ' + errorMessage);
+                        // Возвращаем форму в исходное состояние
+                        $('#removeImage').click();
+                    }
+                });
+            }
+            
+            // Фиксируем путь к изображению перед отправкой формы
+            $('form').submit(function() {
+                // Проверяем, что путь к изображению не пустой
+                if ($('#imagePreview').is(':visible') && $('#imagePath').val() === '') {
+                    // Если путь пустой, но предпросмотр видим, возможно путь потерялся
+                    alert('Ошибка: путь к изображению не сохранен. Пожалуйста, загрузите изображение заново.');
+                    return false;
+                }
+                
+                console.log('Отправка формы с изображением: ' + $('#imagePath').val());
+                return true;
+            });
+        });
+    </script>
+} 

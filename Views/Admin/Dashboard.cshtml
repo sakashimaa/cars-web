@@ -1,0 +1,128 @@
+@{
+    ViewData["Title"] = "Панель администратора";
+}
+
+<div class="container-fluid py-4">
+    <div class="row">
+        <div class="col-12">
+            <h1 class="mb-4">Панель администратора</h1>
+            
+            <div class="card shadow-sm mb-4">
+                <div class="card-body">
+                    <h5 class="card-title">Добро пожаловать, @Context.Session.GetString("AdminFullName")</h5>
+                    <p class="card-text">Вы вошли в панель администратора с правами администратора
+                    </p>
+                    
+                    <div class="mt-3">
+                        <h6>Ваши разрешения:</h6>
+                        <ul>
+                            @foreach (var permission in (Context.Session.GetString("AdminPermissions") ?? "").Split(',', StringSplitOptions.RemoveEmptyEntries))
+                            {
+                                <li>@permission</li>
+                            }
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="row mb-4">
+                <div class="col-md-3 mb-4">
+                    <div class="card shadow-sm h-100">
+                        <div class="card-body d-flex flex-column">
+                            <h5 class="card-title">Управление пользователями</h5>
+                            <p class="card-text flex-grow-1">Просмотр и управление учетными записями пользователей системы.</p>
+                            <a asp-controller="Admin" asp-action="Users" class="btn btn-primary mt-auto">
+                                Управление пользователями <i class="fas fa-arrow-right ms-1"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-3 mb-4">
+                    <div class="card shadow-sm h-100">
+                        <div class="card-body d-flex flex-column">
+                            <h5 class="card-title">Управление автомобилями</h5>
+                            <p class="card-text flex-grow-1">Просмотр и управление информацией об автомобилях в системе.</p>
+                            <a asp-controller="Admin" asp-action="Cars" class="btn btn-primary mt-auto">
+                                Управление автомобилями <i class="fas fa-arrow-right ms-1"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-3 mb-4">
+                    <div class="card shadow-sm h-100">
+                        <div class="card-body d-flex flex-column">
+                            <h5 class="card-title">Управление сотрудниками</h5>
+                            <p class="card-text flex-grow-1">Просмотр и управление информацией о сотрудниках.</p>
+                            <a asp-controller="Admin" asp-action="Workers" class="btn btn-primary mt-auto">
+                                Управление сотрудниками <i class="fas fa-arrow-right ms-1"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-3 mb-4">
+                    <div class="card shadow-sm h-100">
+                        <div class="card-body d-flex flex-column">
+                            <h5 class="card-title">Управление услугами</h5>
+                            <p class="card-text flex-grow-1">Просмотр и управление услугами автосервиса.</p>
+                            <a asp-controller="Admin" asp-action="Services" class="btn btn-primary mt-auto">
+                                Управление услугами <i class="fas fa-arrow-right ms-1"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="col-12">
+                    <div class="card shadow-sm">
+                        <div class="card-body">
+                            <h5 class="card-title">Системная информация</h5>
+                            <div class="table-responsive">
+                                <table class="table table-striped">
+                                    <tbody>
+                                        <tr>
+                                            <th>ID администратора</th>
+                                            <td>@Context.Session.GetInt32("AdminId")</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Имя пользователя</th>
+                                            <td>@Context.Session.GetString("AdminUsername")</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Полное имя</th>
+                                            <td>@Context.Session.GetString("AdminFullName")</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Время входа</th>
+                                            <td>@DateTime.Now.ToString("dd.MM.yyyy HH:mm:ss")</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="mt-4">
+                <form asp-action="Logout" asp-controller="Admin" method="post">
+                    <button type="submit" class="btn btn-outline-danger">
+                        <i class="fas fa-sign-out-alt me-1"></i> Выйти
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        // Инициализация компонентов страницы
+        $(document).ready(function() {
+            // Здесь можно добавить JavaScript для админской панели в будущем
+        });
+    </script>
+} 

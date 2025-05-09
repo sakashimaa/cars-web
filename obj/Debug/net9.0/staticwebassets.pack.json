@@ -1,296 +1,512 @@
 {
   "Files": [
     {
-      "Id": "C:\\Users\\yoko\\Desktop\\cars-web\\obj\\Debug\\net9.0\\scopedcss\\projectbundle\\cars-web.bundle.scp.css",
+      "Id": "C:\\Users\\shido\\cars-web\\obj\\Debug\\net9.0\\scopedcss\\projectbundle\\cars-web.bundle.scp.css",
       "PackagePath": "staticwebassets\\cars-web.0akcbadvcf.bundle.scp.css"
     },
     {
-      "Id": "C:\\Users\\yoko\\Desktop\\cars-web\\wwwroot\\css\\site.css",
+      "Id": "C:\\Users\\shido\\cars-web\\wwwroot\\3d\\model.bin",
+      "PackagePath": "staticwebassets\\3d\\model.bin"
+    },
+    {
+      "Id": "C:\\Users\\shido\\cars-web\\wwwroot\\3d\\model.gltf",
+      "PackagePath": "staticwebassets\\3d\\model.gltf"
+    },
+    {
+      "Id": "C:\\Users\\shido\\cars-web\\wwwroot\\css\\site.css",
       "PackagePath": "staticwebassets\\css\\site.css"
     },
     {
-      "Id": "C:\\Users\\yoko\\Desktop\\cars-web\\wwwroot\\favicon.ico",
+      "Id": "C:\\Users\\shido\\cars-web\\wwwroot\\favicon.ico",
       "PackagePath": "staticwebassets\\favicon.ico"
     },
     {
-      "Id": "C:\\Users\\yoko\\Desktop\\cars-web\\wwwroot\\images\\alexey_kuznetsov.jpg",
+      "Id": "C:\\Users\\shido\\cars-web\\wwwroot\\images\\462afa5c-5fcc-40b8-91ad-636250548e60.jpg",
+      "PackagePath": "staticwebassets\\images\\462afa5c-5fcc-40b8-91ad-636250548e60.jpg"
+    },
+    {
+      "Id": "C:\\Users\\shido\\cars-web\\wwwroot\\images\\59399cc6-7dba-40a0-92e0-56e40392faf5.jpg",
+      "PackagePath": "staticwebassets\\images\\59399cc6-7dba-40a0-92e0-56e40392faf5.jpg"
+    },
+    {
+      "Id": "C:\\Users\\shido\\cars-web\\wwwroot\\images\\alexey_kuznetsov.jpg",
       "PackagePath": "staticwebassets\\images\\alexey_kuznetsov.jpg"
     },
     {
-      "Id": "C:\\Users\\yoko\\Desktop\\cars-web\\wwwroot\\images\\car-placeholder.jpg",
+      "Id": "C:\\Users\\shido\\cars-web\\wwwroot\\images\\car-placeholder.jpg",
       "PackagePath": "staticwebassets\\images\\car-placeholder.jpg"
     },
     {
-      "Id": "C:\\Users\\yoko\\Desktop\\cars-web\\wwwroot\\images\\filter.png",
+      "Id": "C:\\Users\\shido\\cars-web\\wwwroot\\images\\cb3d98dc-2955-4430-a1c9-b31be1bdc3c5.jpg",
+      "PackagePath": "staticwebassets\\images\\cb3d98dc-2955-4430-a1c9-b31be1bdc3c5.jpg"
+    },
+    {
+      "Id": "C:\\Users\\shido\\cars-web\\wwwroot\\images\\ff77b541-9f5d-4673-b9fa-afbb24e093f6.jpg",
+      "PackagePath": "staticwebassets\\images\\ff77b541-9f5d-4673-b9fa-afbb24e093f6.jpg"
+    },
+    {
+      "Id": "C:\\Users\\shido\\cars-web\\wwwroot\\images\\filter.png",
       "PackagePath": "staticwebassets\\images\\filter.png"
     },
     {
-      "Id": "C:\\Users\\yoko\\Desktop\\cars-web\\wwwroot\\images\\honda-civic.jpg",
+      "Id": "C:\\Users\\shido\\cars-web\\wwwroot\\images\\honda-civic.jpg",
       "PackagePath": "staticwebassets\\images\\honda-civic.jpg"
     },
     {
-      "Id": "C:\\Users\\yoko\\Desktop\\cars-web\\wwwroot\\images\\ivan_petrov.jpg",
+      "Id": "C:\\Users\\shido\\cars-web\\wwwroot\\images\\ivan_petrov.jpg",
       "PackagePath": "staticwebassets\\images\\ivan_petrov.jpg"
     },
     {
-      "Id": "C:\\Users\\yoko\\Desktop\\cars-web\\wwwroot\\images\\oil.png",
+      "Id": "C:\\Users\\shido\\cars-web\\wwwroot\\images\\oil.png",
       "PackagePath": "staticwebassets\\images\\oil.png"
     },
     {
-      "Id": "C:\\Users\\yoko\\Desktop\\cars-web\\wwwroot\\images\\razval.png",
+      "Id": "C:\\Users\\shido\\cars-web\\wwwroot\\images\\painted-1.jpg",
+      "PackagePath": "staticwebassets\\images\\painted-1.jpg"
+    },
+    {
+      "Id": "C:\\Users\\shido\\cars-web\\wwwroot\\images\\painted-2.jpg",
+      "PackagePath": "staticwebassets\\images\\painted-2.jpg"
+    },
+    {
+      "Id": "C:\\Users\\shido\\cars-web\\wwwroot\\images\\painted-3.jpg",
+      "PackagePath": "staticwebassets\\images\\painted-3.jpg"
+    },
+    {
+      "Id": "C:\\Users\\shido\\cars-web\\wwwroot\\images\\painted-bmw-1.jpg",
+      "PackagePath": "staticwebassets\\images\\painted-bmw-1.jpg"
+    },
+    {
+      "Id": "C:\\Users\\shido\\cars-web\\wwwroot\\images\\painted-bmw-2.jpg",
+      "PackagePath": "staticwebassets\\images\\painted-bmw-2.jpg"
+    },
+    {
+      "Id": "C:\\Users\\shido\\cars-web\\wwwroot\\images\\painted-camry-1.jpg",
+      "PackagePath": "staticwebassets\\images\\painted-camry-1.jpg"
+    },
+    {
+      "Id": "C:\\Users\\shido\\cars-web\\wwwroot\\images\\painted-camry-2.jpg",
+      "PackagePath": "staticwebassets\\images\\painted-camry-2.jpg"
+    },
+    {
+      "Id": "C:\\Users\\shido\\cars-web\\wwwroot\\images\\painted-cruiser-1.jpg",
+      "PackagePath": "staticwebassets\\images\\painted-cruiser-1.jpg"
+    },
+    {
+      "Id": "C:\\Users\\shido\\cars-web\\wwwroot\\images\\painted-cruiser-2.jpg",
+      "PackagePath": "staticwebassets\\images\\painted-cruiser-2.jpg"
+    },
+    {
+      "Id": "C:\\Users\\shido\\cars-web\\wwwroot\\images\\razval.png",
       "PackagePath": "staticwebassets\\images\\razval.png"
     },
     {
-      "Id": "C:\\Users\\yoko\\Desktop\\cars-web\\wwwroot\\images\\tesla-model-s.jpg",
+      "Id": "C:\\Users\\shido\\cars-web\\wwwroot\\images\\tesla-model-s.jpg",
       "PackagePath": "staticwebassets\\images\\tesla-model-s.jpg"
     },
     {
-      "Id": "C:\\Users\\yoko\\Desktop\\cars-web\\wwwroot\\images\\toyota-camry.jpg",
+      "Id": "C:\\Users\\shido\\cars-web\\wwwroot\\images\\toyota-camry.jpg",
       "PackagePath": "staticwebassets\\images\\toyota-camry.jpg"
     },
     {
-      "Id": "C:\\Users\\yoko\\Desktop\\cars-web\\wwwroot\\js\\site.js",
+      "Id": "C:\\Users\\shido\\cars-web\\wwwroot\\js\\car3DViewer.js",
+      "PackagePath": "staticwebassets\\js\\car3DViewer.js"
+    },
+    {
+      "Id": "C:\\Users\\shido\\cars-web\\wwwroot\\js\\site.js",
       "PackagePath": "staticwebassets\\js\\site.js"
     },
     {
-      "Id": "C:\\Users\\yoko\\Desktop\\cars-web\\wwwroot\\lib\\bootstrap\\LICENSE",
+      "Id": "C:\\Users\\shido\\cars-web\\wwwroot\\lib\\bootstrap\\LICENSE",
       "PackagePath": "staticwebassets\\lib\\bootstrap"
     },
     {
-      "Id": "C:\\Users\\yoko\\Desktop\\cars-web\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.css",
+      "Id": "C:\\Users\\shido\\cars-web\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.css",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.css"
     },
     {
-      "Id": "C:\\Users\\yoko\\Desktop\\cars-web\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.css.map",
+      "Id": "C:\\Users\\shido\\cars-web\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.css.map",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.css.map"
     },
     {
-      "Id": "C:\\Users\\yoko\\Desktop\\cars-web\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.min.css",
+      "Id": "C:\\Users\\shido\\cars-web\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.min.css",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.min.css"
     },
     {
-      "Id": "C:\\Users\\yoko\\Desktop\\cars-web\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.min.css.map",
+      "Id": "C:\\Users\\shido\\cars-web\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.min.css.map",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.min.css.map"
     },
     {
-      "Id": "C:\\Users\\yoko\\Desktop\\cars-web\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.css",
+      "Id": "C:\\Users\\shido\\cars-web\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.css",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.css"
     },
     {
-      "Id": "C:\\Users\\yoko\\Desktop\\cars-web\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.css.map",
+      "Id": "C:\\Users\\shido\\cars-web\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.css.map",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.css.map"
     },
     {
-      "Id": "C:\\Users\\yoko\\Desktop\\cars-web\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.min.css",
+      "Id": "C:\\Users\\shido\\cars-web\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.min.css",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.min.css"
     },
     {
-      "Id": "C:\\Users\\yoko\\Desktop\\cars-web\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.min.css.map",
+      "Id": "C:\\Users\\shido\\cars-web\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.min.css.map",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.min.css.map"
     },
     {
-      "Id": "C:\\Users\\yoko\\Desktop\\cars-web\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.css",
+      "Id": "C:\\Users\\shido\\cars-web\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.css",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.css"
     },
     {
-      "Id": "C:\\Users\\yoko\\Desktop\\cars-web\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.css.map",
+      "Id": "C:\\Users\\shido\\cars-web\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.css.map",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.css.map"
     },
     {
-      "Id": "C:\\Users\\yoko\\Desktop\\cars-web\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.min.css",
+      "Id": "C:\\Users\\shido\\cars-web\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.min.css",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.min.css"
     },
     {
-      "Id": "C:\\Users\\yoko\\Desktop\\cars-web\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.min.css.map",
+      "Id": "C:\\Users\\shido\\cars-web\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.min.css.map",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.min.css.map"
     },
     {
-      "Id": "C:\\Users\\yoko\\Desktop\\cars-web\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.css",
+      "Id": "C:\\Users\\shido\\cars-web\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.css",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.css"
     },
     {
-      "Id": "C:\\Users\\yoko\\Desktop\\cars-web\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.css.map",
+      "Id": "C:\\Users\\shido\\cars-web\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.css.map",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.css.map"
     },
     {
-      "Id": "C:\\Users\\yoko\\Desktop\\cars-web\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.min.css",
+      "Id": "C:\\Users\\shido\\cars-web\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.min.css",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.min.css"
     },
     {
-      "Id": "C:\\Users\\yoko\\Desktop\\cars-web\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.min.css.map",
+      "Id": "C:\\Users\\shido\\cars-web\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.min.css.map",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.min.css.map"
     },
     {
-      "Id": "C:\\Users\\yoko\\Desktop\\cars-web\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.css",
+      "Id": "C:\\Users\\shido\\cars-web\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.css",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.css"
     },
     {
-      "Id": "C:\\Users\\yoko\\Desktop\\cars-web\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.css.map",
+      "Id": "C:\\Users\\shido\\cars-web\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.css.map",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.css.map"
     },
     {
-      "Id": "C:\\Users\\yoko\\Desktop\\cars-web\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.min.css",
+      "Id": "C:\\Users\\shido\\cars-web\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.min.css",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.min.css"
     },
     {
-      "Id": "C:\\Users\\yoko\\Desktop\\cars-web\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.min.css.map",
+      "Id": "C:\\Users\\shido\\cars-web\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.min.css.map",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.min.css.map"
     },
     {
-      "Id": "C:\\Users\\yoko\\Desktop\\cars-web\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.css",
+      "Id": "C:\\Users\\shido\\cars-web\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.css",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.css"
     },
     {
-      "Id": "C:\\Users\\yoko\\Desktop\\cars-web\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.css.map",
+      "Id": "C:\\Users\\shido\\cars-web\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.css.map",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.css.map"
     },
     {
-      "Id": "C:\\Users\\yoko\\Desktop\\cars-web\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.min.css",
+      "Id": "C:\\Users\\shido\\cars-web\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.min.css",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.min.css"
     },
     {
-      "Id": "C:\\Users\\yoko\\Desktop\\cars-web\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.min.css.map",
+      "Id": "C:\\Users\\shido\\cars-web\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.min.css.map",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.min.css.map"
     },
     {
-      "Id": "C:\\Users\\yoko\\Desktop\\cars-web\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.css",
+      "Id": "C:\\Users\\shido\\cars-web\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.css",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.css"
     },
     {
-      "Id": "C:\\Users\\yoko\\Desktop\\cars-web\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.css.map",
+      "Id": "C:\\Users\\shido\\cars-web\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.css.map",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.css.map"
     },
     {
-      "Id": "C:\\Users\\yoko\\Desktop\\cars-web\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.min.css",
+      "Id": "C:\\Users\\shido\\cars-web\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.min.css",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.min.css"
     },
     {
-      "Id": "C:\\Users\\yoko\\Desktop\\cars-web\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.min.css.map",
+      "Id": "C:\\Users\\shido\\cars-web\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.min.css.map",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.min.css.map"
     },
     {
-      "Id": "C:\\Users\\yoko\\Desktop\\cars-web\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.css",
+      "Id": "C:\\Users\\shido\\cars-web\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.css",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.css"
     },
     {
-      "Id": "C:\\Users\\yoko\\Desktop\\cars-web\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.css.map",
+      "Id": "C:\\Users\\shido\\cars-web\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.css.map",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.css.map"
     },
     {
-      "Id": "C:\\Users\\yoko\\Desktop\\cars-web\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.min.css",
+      "Id": "C:\\Users\\shido\\cars-web\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.min.css",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.min.css"
     },
     {
-      "Id": "C:\\Users\\yoko\\Desktop\\cars-web\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.min.css.map",
+      "Id": "C:\\Users\\shido\\cars-web\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.min.css.map",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.min.css.map"
     },
     {
-      "Id": "C:\\Users\\yoko\\Desktop\\cars-web\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.js",
+      "Id": "C:\\Users\\shido\\cars-web\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.js",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.js"
     },
     {
-      "Id": "C:\\Users\\yoko\\Desktop\\cars-web\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.js.map",
+      "Id": "C:\\Users\\shido\\cars-web\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.js.map",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.js.map"
     },
     {
-      "Id": "C:\\Users\\yoko\\Desktop\\cars-web\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.min.js",
+      "Id": "C:\\Users\\shido\\cars-web\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.min.js",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.min.js"
     },
     {
-      "Id": "C:\\Users\\yoko\\Desktop\\cars-web\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.min.js.map",
+      "Id": "C:\\Users\\shido\\cars-web\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.min.js.map",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.min.js.map"
     },
     {
-      "Id": "C:\\Users\\yoko\\Desktop\\cars-web\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.js",
+      "Id": "C:\\Users\\shido\\cars-web\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.js",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.esm.js"
     },
     {
-      "Id": "C:\\Users\\yoko\\Desktop\\cars-web\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.js.map",
+      "Id": "C:\\Users\\shido\\cars-web\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.js.map",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.esm.js.map"
     },
     {
-      "Id": "C:\\Users\\yoko\\Desktop\\cars-web\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.min.js",
+      "Id": "C:\\Users\\shido\\cars-web\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.min.js",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.esm.min.js"
     },
     {
-      "Id": "C:\\Users\\yoko\\Desktop\\cars-web\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.min.js.map",
+      "Id": "C:\\Users\\shido\\cars-web\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.min.js.map",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.esm.min.js.map"
     },
     {
-      "Id": "C:\\Users\\yoko\\Desktop\\cars-web\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.js",
+      "Id": "C:\\Users\\shido\\cars-web\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.js",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.js"
     },
     {
-      "Id": "C:\\Users\\yoko\\Desktop\\cars-web\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.js.map",
+      "Id": "C:\\Users\\shido\\cars-web\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.js.map",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.js.map"
     },
     {
-      "Id": "C:\\Users\\yoko\\Desktop\\cars-web\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.min.js",
+      "Id": "C:\\Users\\shido\\cars-web\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.min.js",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.min.js"
     },
     {
-      "Id": "C:\\Users\\yoko\\Desktop\\cars-web\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.min.js.map",
+      "Id": "C:\\Users\\shido\\cars-web\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.min.js.map",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.min.js.map"
     },
     {
-      "Id": "C:\\Users\\yoko\\Desktop\\cars-web\\wwwroot\\lib\\jquery-validation-unobtrusive\\LICENSE.txt",
+      "Id": "C:\\Users\\shido\\cars-web\\wwwroot\\lib\\jquery-validation-unobtrusive\\LICENSE.txt",
       "PackagePath": "staticwebassets\\lib\\jquery-validation-unobtrusive\\LICENSE.txt"
     },
     {
-      "Id": "C:\\Users\\yoko\\Desktop\\cars-web\\wwwroot\\lib\\jquery-validation-unobtrusive\\dist\\jquery.validate.unobtrusive.js",
+      "Id": "C:\\Users\\shido\\cars-web\\wwwroot\\lib\\jquery-validation-unobtrusive\\dist\\jquery.validate.unobtrusive.js",
       "PackagePath": "staticwebassets\\lib\\jquery-validation-unobtrusive\\dist\\jquery.validate.unobtrusive.js"
     },
     {
-      "Id": "C:\\Users\\yoko\\Desktop\\cars-web\\wwwroot\\lib\\jquery-validation-unobtrusive\\dist\\jquery.validate.unobtrusive.min.js",
+      "Id": "C:\\Users\\shido\\cars-web\\wwwroot\\lib\\jquery-validation-unobtrusive\\dist\\jquery.validate.unobtrusive.min.js",
       "PackagePath": "staticwebassets\\lib\\jquery-validation-unobtrusive\\dist\\jquery.validate.unobtrusive.min.js"
     },
     {
-      "Id": "C:\\Users\\yoko\\Desktop\\cars-web\\wwwroot\\lib\\jquery-validation\\LICENSE.md",
+      "Id": "C:\\Users\\shido\\cars-web\\wwwroot\\lib\\jquery-validation\\LICENSE.md",
       "PackagePath": "staticwebassets\\lib\\jquery-validation\\LICENSE.md"
     },
     {
-      "Id": "C:\\Users\\yoko\\Desktop\\cars-web\\wwwroot\\lib\\jquery-validation\\dist\\additional-methods.js",
+      "Id": "C:\\Users\\shido\\cars-web\\wwwroot\\lib\\jquery-validation\\dist\\additional-methods.js",
       "PackagePath": "staticwebassets\\lib\\jquery-validation\\dist\\additional-methods.js"
     },
     {
-      "Id": "C:\\Users\\yoko\\Desktop\\cars-web\\wwwroot\\lib\\jquery-validation\\dist\\additional-methods.min.js",
+      "Id": "C:\\Users\\shido\\cars-web\\wwwroot\\lib\\jquery-validation\\dist\\additional-methods.min.js",
       "PackagePath": "staticwebassets\\lib\\jquery-validation\\dist\\additional-methods.min.js"
     },
     {
-      "Id": "C:\\Users\\yoko\\Desktop\\cars-web\\wwwroot\\lib\\jquery-validation\\dist\\jquery.validate.js",
+      "Id": "C:\\Users\\shido\\cars-web\\wwwroot\\lib\\jquery-validation\\dist\\jquery.validate.js",
       "PackagePath": "staticwebassets\\lib\\jquery-validation\\dist\\jquery.validate.js"
     },
     {
-      "Id": "C:\\Users\\yoko\\Desktop\\cars-web\\wwwroot\\lib\\jquery-validation\\dist\\jquery.validate.min.js",
+      "Id": "C:\\Users\\shido\\cars-web\\wwwroot\\lib\\jquery-validation\\dist\\jquery.validate.min.js",
       "PackagePath": "staticwebassets\\lib\\jquery-validation\\dist\\jquery.validate.min.js"
     },
     {
-      "Id": "C:\\Users\\yoko\\Desktop\\cars-web\\wwwroot\\lib\\jquery\\LICENSE.txt",
+      "Id": "C:\\Users\\shido\\cars-web\\wwwroot\\lib\\jquery\\LICENSE.txt",
       "PackagePath": "staticwebassets\\lib\\jquery\\LICENSE.txt"
     },
     {
-      "Id": "C:\\Users\\yoko\\Desktop\\cars-web\\wwwroot\\lib\\jquery\\dist\\jquery.js",
+      "Id": "C:\\Users\\shido\\cars-web\\wwwroot\\lib\\jquery\\dist\\jquery.js",
       "PackagePath": "staticwebassets\\lib\\jquery\\dist\\jquery.js"
     },
     {
-      "Id": "C:\\Users\\yoko\\Desktop\\cars-web\\wwwroot\\lib\\jquery\\dist\\jquery.min.js",
+      "Id": "C:\\Users\\shido\\cars-web\\wwwroot\\lib\\jquery\\dist\\jquery.min.js",
       "PackagePath": "staticwebassets\\lib\\jquery\\dist\\jquery.min.js"
     },
     {
-      "Id": "C:\\Users\\yoko\\Desktop\\cars-web\\wwwroot\\lib\\jquery\\dist\\jquery.min.map",
+      "Id": "C:\\Users\\shido\\cars-web\\wwwroot\\lib\\jquery\\dist\\jquery.min.map",
       "PackagePath": "staticwebassets\\lib\\jquery\\dist\\jquery.min.map"
     },
     {
-      "Id": "C:\\Users\\yoko\\Desktop\\cars-web\\wwwroot\\lib\\jquery\\dist\\jquery.slim.js",
+      "Id": "C:\\Users\\shido\\cars-web\\wwwroot\\lib\\jquery\\dist\\jquery.slim.js",
       "PackagePath": "staticwebassets\\lib\\jquery\\dist\\jquery.slim.js"
     },
     {
-      "Id": "C:\\Users\\yoko\\Desktop\\cars-web\\wwwroot\\lib\\jquery\\dist\\jquery.slim.min.js",
+      "Id": "C:\\Users\\shido\\cars-web\\wwwroot\\lib\\jquery\\dist\\jquery.slim.min.js",
       "PackagePath": "staticwebassets\\lib\\jquery\\dist\\jquery.slim.min.js"
     },
     {
-      "Id": "C:\\Users\\yoko\\Desktop\\cars-web\\wwwroot\\lib\\jquery\\dist\\jquery.slim.min.map",
+      "Id": "C:\\Users\\shido\\cars-web\\wwwroot\\lib\\jquery\\dist\\jquery.slim.min.map",
       "PackagePath": "staticwebassets\\lib\\jquery\\dist\\jquery.slim.min.map"
+    },
+    {
+      "Id": "C:\\Users\\shido\\cars-web\\wwwroot\\models\\bmw_m4_f82_razor_2014__www.vecarz.com.glb",
+      "PackagePath": "staticwebassets\\models\\bmw_m4_f82_razor_2014__www.vecarz.com.glb"
+    },
+    {
+      "Id": "C:\\Users\\shido\\cars-web\\wwwroot\\models\\scene.bin",
+      "PackagePath": "staticwebassets\\models\\scene.bin"
+    },
+    {
+      "Id": "C:\\Users\\shido\\cars-web\\wwwroot\\models\\scene.gltf",
+      "PackagePath": "staticwebassets\\models\\scene.gltf"
+    },
+    {
+      "Id": "C:\\Users\\shido\\cars-web\\wwwroot\\models\\textures\\Metal_-_Car_baseColor.png",
+      "PackagePath": "staticwebassets\\models\\textures\\Metal_-_Car_baseColor.png"
+    },
+    {
+      "Id": "C:\\Users\\shido\\cars-web\\wwwroot\\models\\textures\\chassis.003_baseColor.png",
+      "PackagePath": "staticwebassets\\models\\textures\\chassis.003_baseColor.png"
+    },
+    {
+      "Id": "C:\\Users\\shido\\cars-web\\wwwroot\\models\\textures\\chassis.009_baseColor.png",
+      "PackagePath": "staticwebassets\\models\\textures\\chassis.009_baseColor.png"
+    },
+    {
+      "Id": "C:\\Users\\shido\\cars-web\\wwwroot\\models\\textures\\chassis.014_baseColor.png",
+      "PackagePath": "staticwebassets\\models\\textures\\chassis.014_baseColor.png"
+    },
+    {
+      "Id": "C:\\Users\\shido\\cars-web\\wwwroot\\models\\textures\\chassis.015_baseColor.png",
+      "PackagePath": "staticwebassets\\models\\textures\\chassis.015_baseColor.png"
+    },
+    {
+      "Id": "C:\\Users\\shido\\cars-web\\wwwroot\\models\\textures\\chassis.016_baseColor.png",
+      "PackagePath": "staticwebassets\\models\\textures\\chassis.016_baseColor.png"
+    },
+    {
+      "Id": "C:\\Users\\shido\\cars-web\\wwwroot\\models\\textures\\chassis.017_baseColor.png",
+      "PackagePath": "staticwebassets\\models\\textures\\chassis.017_baseColor.png"
+    },
+    {
+      "Id": "C:\\Users\\shido\\cars-web\\wwwroot\\models\\textures\\plate_ok.0_baseColor.png",
+      "PackagePath": "staticwebassets\\models\\textures\\plate_ok.0_baseColor.png"
+    },
+    {
+      "Id": "C:\\Users\\shido\\cars-web\\wwwroot\\models\\textures\\wheel.007_baseColor.png",
+      "PackagePath": "staticwebassets\\models\\textures\\wheel.007_baseColor.png"
+    },
+    {
+      "Id": "C:\\Users\\shido\\cars-web\\wwwroot\\models\\textures\\wheel.009_baseColor.png",
+      "PackagePath": "staticwebassets\\models\\textures\\wheel.009_baseColor.png"
+    },
+    {
+      "Id": "C:\\Users\\shido\\cars-web\\wwwroot\\models\\textures\\wheel.010_baseColor.png",
+      "PackagePath": "staticwebassets\\models\\textures\\wheel.010_baseColor.png"
+    },
+    {
+      "Id": "C:\\Users\\shido\\cars-web\\wwwroot\\uploads\\images\\0074c9a3-6767-4b34-84a1-a6ab9adf98aa.jpg",
+      "PackagePath": "staticwebassets\\uploads\\images\\0074c9a3-6767-4b34-84a1-a6ab9adf98aa.jpg"
+    },
+    {
+      "Id": "C:\\Users\\shido\\cars-web\\wwwroot\\uploads\\images\\04682289-c1a3-4a11-85e9-2e508f137f9e.jpg",
+      "PackagePath": "staticwebassets\\uploads\\images\\04682289-c1a3-4a11-85e9-2e508f137f9e.jpg"
+    },
+    {
+      "Id": "C:\\Users\\shido\\cars-web\\wwwroot\\uploads\\images\\0c54bf57-2a2e-411f-978c-284c5e05aacf.jpg",
+      "PackagePath": "staticwebassets\\uploads\\images\\0c54bf57-2a2e-411f-978c-284c5e05aacf.jpg"
+    },
+    {
+      "Id": "C:\\Users\\shido\\cars-web\\wwwroot\\uploads\\images\\10e68a03-4fd6-425a-841c-12b2cdd9d072.jpg",
+      "PackagePath": "staticwebassets\\uploads\\images\\10e68a03-4fd6-425a-841c-12b2cdd9d072.jpg"
+    },
+    {
+      "Id": "C:\\Users\\shido\\cars-web\\wwwroot\\uploads\\images\\1ce20a78-b54e-4ac9-a308-36ee660fb102.jpg",
+      "PackagePath": "staticwebassets\\uploads\\images\\1ce20a78-b54e-4ac9-a308-36ee660fb102.jpg"
+    },
+    {
+      "Id": "C:\\Users\\shido\\cars-web\\wwwroot\\uploads\\images\\21882e45-fda6-4477-8ed0-6e10708d3f9b.jpg",
+      "PackagePath": "staticwebassets\\uploads\\images\\21882e45-fda6-4477-8ed0-6e10708d3f9b.jpg"
+    },
+    {
+      "Id": "C:\\Users\\shido\\cars-web\\wwwroot\\uploads\\images\\33ff3ad7-b81a-48b4-83d8-81efc85961fd.jpg",
+      "PackagePath": "staticwebassets\\uploads\\images\\33ff3ad7-b81a-48b4-83d8-81efc85961fd.jpg"
+    },
+    {
+      "Id": "C:\\Users\\shido\\cars-web\\wwwroot\\uploads\\images\\52a9e8d8-ac8a-4847-aedf-e3535606eeb6.jpg",
+      "PackagePath": "staticwebassets\\uploads\\images\\52a9e8d8-ac8a-4847-aedf-e3535606eeb6.jpg"
+    },
+    {
+      "Id": "C:\\Users\\shido\\cars-web\\wwwroot\\uploads\\images\\53c345cd-7a2c-4acb-b0f7-b520dff5c4dc.jpg",
+      "PackagePath": "staticwebassets\\uploads\\images\\53c345cd-7a2c-4acb-b0f7-b520dff5c4dc.jpg"
+    },
+    {
+      "Id": "C:\\Users\\shido\\cars-web\\wwwroot\\uploads\\images\\72655f58-9379-4f26-b8c6-b3bf1321fda3.jpg",
+      "PackagePath": "staticwebassets\\uploads\\images\\72655f58-9379-4f26-b8c6-b3bf1321fda3.jpg"
+    },
+    {
+      "Id": "C:\\Users\\shido\\cars-web\\wwwroot\\uploads\\images\\7463879a-14fc-4e5b-bb97-44fee93e1dbb.jpg",
+      "PackagePath": "staticwebassets\\uploads\\images\\7463879a-14fc-4e5b-bb97-44fee93e1dbb.jpg"
+    },
+    {
+      "Id": "C:\\Users\\shido\\cars-web\\wwwroot\\uploads\\images\\81a8e390-8039-4cfc-ad6c-c831b47d7192.jpg",
+      "PackagePath": "staticwebassets\\uploads\\images\\81a8e390-8039-4cfc-ad6c-c831b47d7192.jpg"
+    },
+    {
+      "Id": "C:\\Users\\shido\\cars-web\\wwwroot\\uploads\\images\\82ccd556-b8b3-4660-9038-a76c8ee36eb1.jpg",
+      "PackagePath": "staticwebassets\\uploads\\images\\82ccd556-b8b3-4660-9038-a76c8ee36eb1.jpg"
+    },
+    {
+      "Id": "C:\\Users\\shido\\cars-web\\wwwroot\\uploads\\images\\9def1909-8c04-4597-a052-c758c10caac4.jpg",
+      "PackagePath": "staticwebassets\\uploads\\images\\9def1909-8c04-4597-a052-c758c10caac4.jpg"
+    },
+    {
+      "Id": "C:\\Users\\shido\\cars-web\\wwwroot\\uploads\\images\\a5d86334-5d19-4fdd-b33f-2b0eaa33c33e.jpg",
+      "PackagePath": "staticwebassets\\uploads\\images\\a5d86334-5d19-4fdd-b33f-2b0eaa33c33e.jpg"
+    },
+    {
+      "Id": "C:\\Users\\shido\\cars-web\\wwwroot\\uploads\\images\\b19ccdfa-015c-4091-b947-b4732a6a1ee1.jpg",
+      "PackagePath": "staticwebassets\\uploads\\images\\b19ccdfa-015c-4091-b947-b4732a6a1ee1.jpg"
+    },
+    {
+      "Id": "C:\\Users\\shido\\cars-web\\wwwroot\\uploads\\images\\b6f2f8ce-277d-4ac7-843e-cf2271675e99.jpg",
+      "PackagePath": "staticwebassets\\uploads\\images\\b6f2f8ce-277d-4ac7-843e-cf2271675e99.jpg"
+    },
+    {
+      "Id": "C:\\Users\\shido\\cars-web\\wwwroot\\uploads\\images\\bea6d5b8-76ba-4da7-8406-9883e7a5ec1d.jpg",
+      "PackagePath": "staticwebassets\\uploads\\images\\bea6d5b8-76ba-4da7-8406-9883e7a5ec1d.jpg"
+    },
+    {
+      "Id": "C:\\Users\\shido\\cars-web\\wwwroot\\uploads\\images\\d0076e82-c44d-45f1-a6d8-a07a16c56811.jpg",
+      "PackagePath": "staticwebassets\\uploads\\images\\d0076e82-c44d-45f1-a6d8-a07a16c56811.jpg"
+    },
+    {
+      "Id": "C:\\Users\\shido\\cars-web\\wwwroot\\uploads\\images\\d7ee5ae5-42ec-414b-9e5b-3237a9c57b20.jpg",
+      "PackagePath": "staticwebassets\\uploads\\images\\d7ee5ae5-42ec-414b-9e5b-3237a9c57b20.jpg"
+    },
+    {
+      "Id": "C:\\Users\\shido\\cars-web\\wwwroot\\uploads\\images\\e1822586-3c33-4ec3-a717-da74859a9204.jpg",
+      "PackagePath": "staticwebassets\\uploads\\images\\e1822586-3c33-4ec3-a717-da74859a9204.jpg"
+    },
+    {
+      "Id": "C:\\Users\\shido\\cars-web\\wwwroot\\uploads\\images\\e41a2fe9-3840-4ccf-88d6-af557114504e.jpg",
+      "PackagePath": "staticwebassets\\uploads\\images\\e41a2fe9-3840-4ccf-88d6-af557114504e.jpg"
+    },
+    {
+      "Id": "C:\\Users\\shido\\cars-web\\wwwroot\\uploads\\images\\ea316ea4-1729-4000-9a3e-6c33f2a767a7.jpg",
+      "PackagePath": "staticwebassets\\uploads\\images\\ea316ea4-1729-4000-9a3e-6c33f2a767a7.jpg"
+    },
+    {
+      "Id": "C:\\Users\\shido\\cars-web\\wwwroot\\uploads\\images\\f69b38bb-ccb2-4ad9-86b1-9881a23de11c.jpg",
+      "PackagePath": "staticwebassets\\uploads\\images\\f69b38bb-ccb2-4ad9-86b1-9881a23de11c.jpg"
     },
     {
       "Id": "obj\\Debug\\net9.0\\staticwebassets\\msbuild.build.cars-web.props",

@@ -1,0 +1,15 @@
+bin/ 
+obj/ 
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Docker
+docker-compose.yml
+docker-compose.override.yml
+docker-compose.override.yml
+docker-compose.override.yml
+docker-compose.override.yml
+docker-compose.override.yml

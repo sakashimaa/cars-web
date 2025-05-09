@@ -1,0 +1,153 @@
+@model cars_web.Models.WorkerCreateModel
+
+@{
+    ViewData["Title"] = "Добавление работника";
+}
+
+<div class="container-fluid py-4">
+    <div class="row mb-4 align-items-center">
+        <div class="col">
+            <h1 class="mb-0">Добавление работника</h1>
+        </div>
+        <div class="col-auto">
+            <a asp-action="Workers" class="btn btn-outline-secondary">
+                <i class="fas fa-arrow-left me-1"></i> К списку работников
+            </a>
+        </div>
+    </div>
+
+    <div class="card shadow-sm">
+        <div class="card-body">
+            <form asp-action="CreateWorker" method="post">
+                <div asp-validation-summary="ModelOnly" class="alert alert-danger"></div>
+                
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <div class="form-floating mb-3">
+                            <input asp-for="Name" class="form-control" placeholder="Имя" />
+                            <label asp-for="Name">Имя</label>
+                            <span asp-validation-for="Name" class="text-danger"></span>
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-6 mb-3">
+                        <div class="form-floating mb-3">
+                            <input asp-for="Position" class="form-control" placeholder="Должность" />
+                            <label asp-for="Position">Должность</label>
+                            <span asp-validation-for="Position" class="text-danger"></span>
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-6 mb-3">
+                        <div class="form-floating mb-3">
+                            <input asp-for="WorkTime" class="form-control" placeholder="Стаж работы" type="number" />
+                            <label asp-for="WorkTime">Стаж работы (лет)</label>
+                            <span asp-validation-for="WorkTime" class="text-danger"></span>
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-6 mb-3">
+                        <div class="form-group">
+                            <label class="form-label">Фотография</label>
+                            <div class="input-group">
+                                <input asp-for="ImagePath" class="form-control" id="imagePath" placeholder="Путь к изображению" readonly />
+                                <label for="imageUpload" class="btn btn-outline-primary">Выбрать файл</label>
+                            </div>
+                            <span asp-validation-for="ImagePath" class="text-danger"></span>
+                            <input type="file" id="imageUpload" class="d-none" accept="image/*" />
+                            <div id="imagePreview" class="mt-2 d-none">
+                                <img src="" alt="Предпросмотр" class="img-thumbnail" style="max-height: 200px;" />
+                                <button type="button" class="btn btn-sm btn-outline-danger mt-1" id="removeImage">Удалить</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-12 mb-3">
+                        <div class="form-floating mb-3">
+                            <input asp-for="ShortDescription" class="form-control" placeholder="Краткое описание" />
+                            <label asp-for="ShortDescription">Краткое описание</label>
+                            <span asp-validation-for="ShortDescription" class="text-danger"></span>
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-12 mb-3">
+                        <div class="form-floating mb-3">
+                            <textarea asp-for="FullDescription" class="form-control" placeholder="Полное описание" style="height: 150px"></textarea>
+                            <label asp-for="FullDescription">Полное описание</label>
+                            <span asp-validation-for="FullDescription" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="d-flex justify-content-end gap-2 mt-4">
+                    <a asp-action="Workers" class="btn btn-outline-secondary">Отмена</a>
+                    <button type="submit" class="btn btn-primary">Сохранить</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    
+    <script>
+        $(document).ready(function() {
+            // Получаем токен защиты от CSRF
+            const token = $('input[name="__RequestVerificationToken"]').val();
+            
+            // Обработка загрузки изображения
+            $('#imageUpload').change(function() {
+                const file = this.files[0];
+                if (file) {
+                    const reader = new FileReader();
+                    reader.onload = function(e) {
+                        $('#imagePreview img').attr('src', e.target.result);
+                        $('#imagePreview').removeClass('d-none');
+                    }
+                    reader.readAsDataURL(file);
+                    
+                    // Загрузка файла на сервер
+                    uploadImage(file);
+                }
+            });
+            
+            // Удаление изображения
+            $('#removeImage').click(function() {
+                $('#imageUpload').val('');
+                $('#imagePath').val('');
+                $('#imagePreview').addClass('d-none');
+                $('#imagePreview img').attr('src', '');
+            });
+            
+            // Функция загрузки изображения на сервер
+            function uploadImage(file) {
+                const formData = new FormData();
+                formData.append('file', file);
+                formData.append('__RequestVerificationToken', token);
+                
+                $.ajax({
+                    url: '/admin/upload-image',
+                    type: 'POST',
+                    data: formData,
+                    processData: false,
+                    contentType: false,
+                    success: function(response) {
+                        if (response.success) {
+                            $('#imagePath').val(response.imagePath);
+                        } else {
+                            alert('Ошибка: ' + response.message);
+                        }
+                    },
+                    error: function(xhr) {
+                        let errorMessage = 'Ошибка загрузки изображения';
+                        if (xhr.responseJSON && xhr.responseJSON.message) {
+                            errorMessage = xhr.responseJSON.message;
+                        }
+                        alert(errorMessage);
+                    }
+                });
+            }
+        });
+    </script>
+} 

@@ -1,5 +1,6 @@
 using cars_web.Extensions;
 using cars_web.Services;
+using Microsoft.AspNetCore.StaticFiles;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -12,6 +13,9 @@ builder.Services.AddScoped<cars_web.Services.ApiService>();
 builder.Services.AddScoped<cars_web.Services.AuthService>();
 builder.Services.AddScoped<PaintingServiceClient>();
 builder.Services.AddHttpContextAccessor();
+builder.Services.AddHttpClient<AuthService>();
+builder.Services.AddHttpClient<AdminService>();
+builder.Services.AddScoped<FileService>();
 
 // Add session and authentication services
 builder.Services.AddDistributedMemoryCache();
@@ -36,7 +40,18 @@ if (!app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
-app.UseStaticFiles();
+
+// Добавляем поддержку MIME типов для 3D-моделей
+var provider = new Microsoft.AspNetCore.StaticFiles.FileExtensionContentTypeProvider();
+provider.Mappings[".gltf"] = "model/gltf+json";
+provider.Mappings[".glb"] = "model/gltf-binary";
+provider.Mappings[".bin"] = "application/octet-stream";
+
+app.UseStaticFiles(new StaticFileOptions
+{
+    ContentTypeProvider = provider
+});
+
 app.UseRouting();
 
 app.UseSession();

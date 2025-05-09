@@ -1,0 +1,137 @@
+@model cars_web.Models.ServiceUpdateModel
+
+@{
+    ViewData["Title"] = "Редактирование услуги";
+}
+
+<div class="container-fluid py-4">
+    <div class="row mb-4 align-items-center">
+        <div class="col">
+            <h1 class="mb-0">Редактирование услуги</h1>
+        </div>
+        <div class="col-auto">
+            <a asp-action="Services" class="btn btn-outline-secondary">
+                <i class="fas fa-arrow-left me-1"></i> Назад к списку
+            </a>
+        </div>
+    </div>
+
+    <div class="card shadow-sm">
+        <div class="card-body">
+            <form asp-action="EditService" asp-route-id="@ViewBag.ServiceId" method="post" enctype="multipart/form-data">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <div class="form-group mb-3">
+                            <label asp-for="Name" class="form-label">Название</label>
+                            <input asp-for="Name" class="form-control" />
+                            <span asp-validation-for="Name" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group mb-3">
+                            <label asp-for="Price" class="form-label">Цена</label>
+                            <input asp-for="Price" class="form-control" />
+                            <span asp-validation-for="Price" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="form-group mb-3">
+                            <label asp-for="ImagePath" class="form-label">Путь к изображению</label>
+                            <input asp-for="ImagePath" class="form-control" readonly />
+                            <div class="d-flex gap-2 mt-2 align-items-center">
+                                <button type="button" class="btn btn-sm btn-outline-primary" id="selectImageBtn">
+                                    Выбрать изображение
+                                </button>
+                                <span id="selectedFileName" class="text-muted small"></span>
+                            </div>
+                            <input type="file" id="imageUpload" name="file" class="d-none" accept="image/*" />
+                            <span asp-validation-for="ImagePath" class="text-danger"></span>
+                        </div>
+
+                        @if (!string.IsNullOrEmpty(Model.ImagePath))
+                        {
+                            <div class="mt-2 mb-3">
+                                <img src="@Model.ImagePath" alt="Изображение услуги" class="img-thumbnail" style="max-height: 150px;" />
+                            </div>
+                        }
+                    </div>
+                </div>
+
+                <div class="form-group mb-3">
+                    <label asp-for="ShortDescription" class="form-label">Краткое описание</label>
+                    <textarea asp-for="ShortDescription" class="form-control" rows="3"></textarea>
+                    <span asp-validation-for="ShortDescription" class="text-danger"></span>
+                </div>
+
+                <div class="form-group mb-3">
+                    <label asp-for="LongDescription" class="form-label">Полное описание</label>
+                    <textarea asp-for="LongDescription" class="form-control" id="editor" rows="10"></textarea>
+                    <span asp-validation-for="LongDescription" class="text-danger"></span>
+                </div>
+
+                <div class="d-flex justify-content-end">
+                    <a asp-action="Services" class="btn btn-secondary me-2">Отмена</a>
+                    <button type="submit" class="btn btn-primary">Сохранить</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script src="https://cdn.ckeditor.com/ckeditor5/34.0.0/classic/ckeditor.js"></script>
+    
+    <script>
+        $(document).ready(function() {
+            // Инициализация CKEditor
+            ClassicEditor
+                .create(document.querySelector('#editor'))
+                .catch(error => {
+                    console.error(error);
+                });
+                
+            // Обработка выбора изображения
+            $('#selectImageBtn').click(function() {
+                $('#imageUpload').click();
+            });
+            
+            $('#imageUpload').change(function() {
+                var fileName = $(this).val().split('\\').pop();
+                $('#selectedFileName').text(fileName);
+                
+                if (fileName) {
+                    // Загрузка изображения
+                    var formData = new FormData();
+                    formData.append('file', this.files[0]);
+                    
+                    $.ajax({
+                        url: '@Url.Action("UploadImage", "Admin")',
+                        type: 'POST',
+                        data: formData,
+                        processData: false,
+                        contentType: false,
+                        success: function(result) {
+                            if (result.success) {
+                                $('#ImagePath').val(result.imagePath);
+                                // Обновляем превью изображения
+                                if ($('.img-thumbnail').length) {
+                                    $('.img-thumbnail').attr('src', result.imagePath);
+                                } else {
+                                    $('<div class="mt-2 mb-3"><img src="' + result.imagePath + '" alt="Изображение услуги" class="img-thumbnail" style="max-height: 150px;" /></div>').insertAfter('#ImagePath').next();
+                                }
+                            } else {
+                                alert('Ошибка при загрузке изображения');
+                            }
+                        },
+                        error: function() {
+                            alert('Ошибка при загрузке изображения');
+                        }
+                    });
+                }
+            });
+        });
+    </script>
+} 

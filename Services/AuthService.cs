@@ -101,6 +101,7 @@ namespace cars_web.Services
 
                 _logger.LogInformation($"email: {model.Email}, password: {model.Password}");
                 
+                _logger.LogInformation($"base url: {_baseApiUrl}");
                 var response = await _httpClient.PostAsync($"{_baseApiUrl}/user/login", formContent);
                 var responseString = await response.Content.ReadAsStringAsync();
                 _logger.LogInformation($"response: {responseString}");
@@ -195,6 +196,36 @@ namespace cars_web.Services
             {
                 // Очищаем заголовки после запроса
                 _httpClient.DefaultRequestHeaders.Authorization = null;
+            }
+        }
+
+        public async Task<AdminTokenResponse> AdminLoginAsync(AdminLoginModel model)
+        {
+            try
+            {
+                var jsonContent = JsonSerializer.Serialize(model);
+                var content = new StringContent(jsonContent, Encoding.UTF8, "application/json");
+                
+                _logger.LogInformation($"Admin login attempt: username: {model.Username} password: {model.Password}");
+                
+                var response = await _httpClient.PostAsync($"{_baseApiUrl}/admin/login", content);
+                var responseString = await response.Content.ReadAsStringAsync();
+                _logger.LogInformation($"Admin login response: {responseString}");
+                
+                if (response.IsSuccessStatusCode)
+                {
+                    var tokenResponse = await response.Content.ReadFromJsonAsync<AdminTokenResponse>();
+                    return tokenResponse;
+                }
+                
+                var errorContent = await response.Content.ReadAsStringAsync();
+                _logger.LogError("Error admin logging in: {ErrorContent}", errorContent);
+                return null;
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Exception during admin login");
+                return null;
             }
         }
     }

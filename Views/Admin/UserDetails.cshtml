@@ -1,0 +1,125 @@
+@model cars_web.Models.UserViewModel
+
+@{
+    ViewData["Title"] = "Информация о пользователе";
+}
+
+<div class="container-fluid py-4">
+    <div class="row mb-4 align-items-center">
+        <div class="col">
+            <h1 class="mb-0">Информация о пользователе</h1>
+        </div>
+        <div class="col-auto">
+            <a asp-action="Users" class="btn btn-outline-secondary">
+                <i class="fas fa-arrow-left me-1"></i> К списку пользователей
+            </a>
+        </div>
+    </div>
+
+    <div class="card shadow-sm mb-4">
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-3 text-center mb-4 mb-md-0">
+                    <div class="mb-3">
+                        <div class="user-avatar rounded-circle mx-auto mb-3 d-flex justify-content-center align-items-center bg-light" style="width: 150px; height: 150px; font-size: 60px;">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <h4>@Model.Email</h4>
+                        <p class="text-muted">
+                            @if (Model.IsEmailConfirmed)
+                            {
+                                <span class="badge bg-success">Email подтвержден</span>
+                            }
+                            else
+                            {
+                                <span class="badge bg-warning">Email не подтвержден</span>
+                            }
+                        </p>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <a asp-action="EditUser" asp-route-id="@Model.Id" class="btn btn-outline-primary w-100 mb-2">
+                            <i class="fas fa-edit me-1"></i> Редактировать
+                        </a>
+                        <button type="button" class="btn btn-outline-danger w-100" 
+                                data-bs-toggle="modal" data-bs-target="#deleteModal" 
+                                data-user-id="@Model.Id" data-user-email="@Model.Email">
+                            <i class="fas fa-trash-alt me-1"></i> Удалить
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="col-md-9">
+                    <h5 class="border-bottom pb-2 mb-3">Основная информация</h5>
+                    <div class="row mb-4">
+                        <div class="col-md-6 mb-3">
+                            <div class="form-group">
+                                <label class="form-label text-muted">ID пользователя</label>
+                                <div class="fw-bold">@Model.Id</div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <div class="form-group">
+                                <label class="form-label text-muted">Email</label>
+                                <div class="fw-bold">@Model.Email</div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <div class="form-group">
+                                <label class="form-label text-muted">Имя</label>
+                                <div class="fw-bold">@(string.IsNullOrEmpty(Model.FirstName) ? "-" : Model.FirstName)</div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <div class="form-group">
+                                <label class="form-label text-muted">Фамилия</label>
+                                <div class="fw-bold">@(string.IsNullOrEmpty(Model.LastName) ? "-" : Model.LastName)</div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <div class="form-group">
+                                <label class="form-label text-muted">Дата регистрации</label>
+                                <div class="fw-bold">@Model.CreatedAt.ToString("dd.MM.yyyy HH:mm")</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Модальное окно подтверждения удаления -->
+<div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="deleteModalLabel">Подтверждение удаления</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>Вы действительно хотите удалить пользователя <span id="userEmail"></span>?</p>
+                <p class="text-danger">Это действие нельзя отменить.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Отмена</button>
+                <form id="deleteForm" asp-action="DeleteUser" method="post">
+                    <input type="hidden" id="userId" name="id" value="@Model.Id" />
+                    <button type="submit" class="btn btn-danger">Удалить</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        $(document).ready(function() {
+            $('#deleteModal').on('show.bs.modal', function (event) {
+                var button = $(event.relatedTarget);
+                var userEmail = button.data('user-email');
+                $('#userEmail').text(userEmail);
+            });
+        });
+    </script>
+} 

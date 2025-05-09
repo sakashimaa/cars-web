@@ -19,7 +19,7 @@
                 <div class="card border-0 shadow-sm car-gallery">
                     @if (!string.IsNullOrEmpty(Model.ImagePath))
                     {
-                        <img src="~/images/@Model.ImagePath" class="img-fluid rounded" alt="@Model.Name">
+                        <img src="~/@Model.ImagePath" class="img-fluid rounded" alt="@Model.Name">
                     }
                     else
                     {
